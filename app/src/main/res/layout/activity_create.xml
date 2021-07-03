@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateMain">
+
+    <TextView
+        android:id="@+id/create_front_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/create_front_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/create_front_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_hint_front_input"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_front_text" />
+
+    <TextView
+        android:id="@+id/create_back_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/create_back_text"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_front_input" />
+
+    <EditText
+        android:id="@+id/create_back_input_true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_hint_back_input_true"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_back_text" />
+
+    <EditText
+        android:id="@+id/create_back_input_false1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_hint_back_input_false"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_back_input_true" />
+
+    <EditText
+        android:id="@+id/create_back_input_false2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_hint_back_input_false"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_back_input_false1" />
+
+    <Button
+        android:id="@+id/create_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_back_input_false2"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

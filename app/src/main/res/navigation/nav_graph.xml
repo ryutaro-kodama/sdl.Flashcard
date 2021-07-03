@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="jp.ac.titech.itpro.sdl.frashcard.FirstFragment"
+        android:name="jp.ac.titech.itpro.sdl.frashcard.CreateMain"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/activity_create">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
