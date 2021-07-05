@@ -33,6 +33,22 @@ public class Card {
         new Card(front, back_true, "", "");
     }
 
+    public String getFront() {
+        return front;
+    }
+
+    public String getBack_true() {
+        return back_true;
+    }
+
+    public String getBack_false1() {
+        return back_false1;
+    }
+
+    public String getBack_false2() {
+        return back_false2;
+    }
+
     public void writeCard(JsonWriter writer) throws IOException {
         writer.beginObject();
         writer.name(FRONT).value(front);

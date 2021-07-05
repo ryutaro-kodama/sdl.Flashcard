@@ -8,13 +8,21 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import java.util.ArrayList;
+
+import jp.ac.titech.itpro.sdl.frashcard.Card;
+import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
 import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
 import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
 import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
 
 public class TestFrontActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
+
+    private ArrayList<Card> cardData;
 
 //    public final static String TEST_TYPE_ARG = "test_type";
 
@@ -23,7 +31,14 @@ public class TestFrontActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        setContentView(R.layout.activity_test_main);
+        ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+
+        // Load card data.
+        CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
+        cardData = cardDataFile.getCardData();
+
+        Card card = cardData.get(0);
+        binding.setCard(card);
 
 //        // Set create button and register intent.
 //        Button buttonNewCard = findViewById(R.id.test_front);

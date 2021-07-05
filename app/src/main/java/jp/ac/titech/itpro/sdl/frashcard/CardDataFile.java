@@ -87,6 +87,10 @@ public class CardDataFile {
         cardData.addAll(tmpCardData);
     }
 
+    public ArrayList<Card> getCardData() {
+        return cardData;
+    }
+
     public void save() {
         // Open or create file.
         if (!file.exists()) {
