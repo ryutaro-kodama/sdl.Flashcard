@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateActivity" />
+        <activity android:name=".test.TestMainActivity" />
+        <activity android:name=".test.TestFrontActivity" />
     </application>
 
 </manifest>

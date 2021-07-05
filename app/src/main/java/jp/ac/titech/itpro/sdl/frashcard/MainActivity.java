@@ -3,35 +3,46 @@ package jp.ac.titech.itpro.sdl.frashcard;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import jp.ac.titech.itpro.sdl.frashcard.test.TestMainActivity;
+
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
+//    static final String CARD_DATA_ARG = "card_data";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
+
+        // Set toolbar.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button buttonGo1 = findViewById(R.id.main_create_new_card);
-        buttonGo1.setOnClickListener(v -> {
-            Log.d(TAG, "onClick - Create");
+        // Set create button and register intent.
+        Button buttonNewCard = findViewById(R.id.main_create_new_card);
+        buttonNewCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CreateActivity.class);
-            // 呼び出し先のActivityをAnswerActivityと直接指定
-//            intent.putExtra(AnswerActivity.NAME_EXTRA, name);
+//            intent.putExtra(MainActivity.CARD_DATA_ARG, cardData.toString());  // Add an argument, 'CardData' object.
+            // 引数情報を追加
+            startActivity(intent);
+            // 特に結果を得ることは想定していない
+        });
+
+        // Set test button and register intent.
+        Button buttonTestCard = findViewById(R.id.main_test_card);
+        buttonTestCard.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TestMainActivity.class);
+//            intent.putExtra(MainActivity.CARD_DATA_ARG, cardData.toString());  // Add an argument, 'CardData' object.
             // 引数情報を追加
             startActivity(intent);
             // 特に結果を得ることは想定していない
