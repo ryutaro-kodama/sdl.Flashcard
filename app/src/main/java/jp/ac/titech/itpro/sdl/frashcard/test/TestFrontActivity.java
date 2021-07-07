@@ -31,33 +31,18 @@ public class TestFrontActivity extends AppCompatActivity {
 
     private ArrayList<Card> cardData;
     private int cardIndex = 0;
-//    private View contentView;
-
-//    public final static String TEST_TYPE_ARG = "test_type";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_test);
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
 
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
         cardData = cardDataFile.getCardData();
 
         initTesting();
-
-//        // Set create button and register intent.
-//        Button buttonNewCard = findViewById(R.id.test_front);
-//        buttonNewCard.setOnClickListener(v -> {
-//            Intent intent = new Intent(TestMainActivity.this, CreateActivity.class);
-////            intent.putExtra(TestMainActivity.TEST_TYPE_ARG, cardData.toString());  // Add an argument, 'CardData' object.
-//            // 引数情報を追加
-//            startActivity(intent);
-//            // 特に結果を得ることは想定していない
-//        });
     }
 
     private void initTesting() {
