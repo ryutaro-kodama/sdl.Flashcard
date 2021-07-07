@@ -17,7 +17,6 @@ public class TestFrontActivity extends TestActivity {
     @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
-
         binding = (TestContentsFrontBindingImpl) setContent(R.layout.test_contents_front);
     }
 
@@ -45,6 +44,7 @@ public class TestFrontActivity extends TestActivity {
 
     @Override
     protected void finishTesting() {
-        Log.d(TAG, "finish!!!");
+        Log.d(TAG, "finishTesting");
+        finish();
     }
 }

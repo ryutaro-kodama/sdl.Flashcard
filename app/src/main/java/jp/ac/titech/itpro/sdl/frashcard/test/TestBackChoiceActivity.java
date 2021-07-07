@@ -11,6 +11,7 @@ import jp.ac.titech.itpro.sdl.frashcard.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
 
+
 public class TestBackChoiceActivity extends TestActivity {
     private final static String TAG = TestFrontActivity.class.getSimpleName();
 
@@ -19,7 +20,6 @@ public class TestBackChoiceActivity extends TestActivity {
     @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
-
         binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
     }
 
@@ -90,7 +90,8 @@ public class TestBackChoiceActivity extends TestActivity {
 
     @Override
     protected void finishTesting() {
-        Log.d(TAG, "finish!!!");
+        Log.d(TAG, "finishTesting");
+        finish();
     }
 }
 

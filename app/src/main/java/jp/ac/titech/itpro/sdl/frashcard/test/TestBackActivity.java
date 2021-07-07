@@ -17,7 +17,6 @@ public class TestBackActivity extends TestActivity {
     @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
-
         binding = (TestContentsBackBindingImpl) setContent(R.layout.test_contents_back);
     }
 
@@ -45,6 +44,7 @@ public class TestBackActivity extends TestActivity {
 
     @Override
     protected void finishTesting() {
-        Log.d(TAG, "finish!!!");
+        Log.d(TAG, "finishTesting");
+        finish();
     }
 }
