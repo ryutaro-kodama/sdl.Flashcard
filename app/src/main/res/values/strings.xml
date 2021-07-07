@@ -2,7 +2,30 @@
     <string name="app_name">sdl.Frashcard</string>
     <string name="action_settings">Settings</string>
 
-    <!--    -->
+    <!--  Strings used for fragments for main page  -->
+    <string name="main_create_new_card">Create New Card</string>
+    <string name="main_test_card">Test Card</string>
+
+    <!--  Strings used for fragments for create page  -->
+<!--    <string name="create_title">Create New Card</string>-->
+    <string name="create_front_text">Input Front Text</string>
+    <string name="create_hint_front_input">input front text</string>
+    <string name="create_back_text">Input Back Text</string>
+    <string name="create_hint_back_input_true">input TRUE back text</string>
+    <string name="create_hint_back_input_false">input FALSE back text</string>
+    <string name="create_save_button">SAVE</string>
+
+    <!--  Strings used for fragments for main test page  -->
+    <string name="test_front">Hide Front Text</string>
+    <string name="test_back">Hide Back text</string>
+    <string name="test_back_from_choice">Hide Back Text (Choice)</string>
+    <string name="test_with_friend">Hide Back text (With Friend)</string>
+
+    <!--  Strings used for fragments for test page  -->
+    <string name="test_answer_button">Check Answer</string>
+    <string name="test_next_button">Next Card</string>
+    <string name="test_finish_button">Finish Testing</string>
+
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
