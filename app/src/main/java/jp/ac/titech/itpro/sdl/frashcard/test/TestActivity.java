@@ -27,8 +27,6 @@ import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl
 public abstract class TestActivity extends AppCompatActivity {
     private final static String TAG = TestActivity.class.getSimpleName();
 
-    protected TestContentsFrontBindingImpl binding;
-
     protected ArrayList<Card> cardData;
     protected int cardIndex = 0;
 

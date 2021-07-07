@@ -10,13 +10,13 @@ import androidx.databinding.DataBindingUtil;
 
 import jp.ac.titech.itpro.sdl.frashcard.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackBindingImpl;
 
 
-public class TestFrontActivity extends TestActivity {
+public class TestBackActivity extends TestActivity {
     private final static String TAG = TestFrontActivity.class.getSimpleName();
 
-    private TestContentsFrontBindingImpl binding;
+    private TestContentsBackBindingImpl binding;
 
     protected void initTesting() {
         Log.d(TAG, "initTesting");
@@ -24,7 +24,7 @@ public class TestFrontActivity extends TestActivity {
         // Change contents based on  test mode.
         LinearLayout layout = findViewById(R.id.test_contents_card);  // Get old contents.
         layout.removeAllViews();  // Remove old contents.
-        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.test_contents_front, layout, true);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.test_contents_back, layout, true);
             // Change old contents to new contents and get binding.
 
         displayCard();
@@ -40,7 +40,7 @@ public class TestFrontActivity extends TestActivity {
             cardIndex++;
 
             // Answer text, next button and finish button are invisible at first.
-            TextView answerText = findViewById(R.id.test_front_front_text);
+            TextView answerText = findViewById(R.id.test_back_back_text);
             answerText.setVisibility(View.INVISIBLE);
 
             Button buttonNext = findViewById(R.id.test_next_button);

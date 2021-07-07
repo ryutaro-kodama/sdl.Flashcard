@@ -26,13 +26,16 @@ public class TestMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_main);
 
         // Set create button and register intent.
-        Button buttonNewCard = findViewById(R.id.test_front);
-        buttonNewCard.setOnClickListener(v -> {
+        Button buttonTestFront = findViewById(R.id.test_front);
+        buttonTestFront.setOnClickListener(v -> {
             Intent intent = new Intent(TestMainActivity.this, TestFrontActivity.class);
-//            intent.putExtra(TestMainActivity.TEST_TYPE_ARG, cardData.toString());  // Add an argument, 'CardData' object.
-            // 引数情報を追加
             startActivity(intent);
-            // 特に結果を得ることは想定していない
+        });
+
+        Button buttonTestBack = findViewById(R.id.test_back);
+        buttonTestBack.setOnClickListener(v -> {
+            Intent intent = new Intent(TestMainActivity.this, TestBackActivity.class);
+            startActivity(intent);
         });
     }
 
