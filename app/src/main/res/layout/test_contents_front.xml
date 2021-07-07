@@ -9,41 +9,46 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/test_contents"
+        android:id="@+id/test_contents_card"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/test_contents_card"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/test_next_button"
+            <TextView
+                android:id="@+id/test_front_back_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test_next_button"
+                android:textSize="@dimen/text_size"
+                android:text="@{card.back_true}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/test_contents_card"
-                app:layout_constraintBottom_toTopOf="@+id/test_finish_button" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/test_answer_button"/>
 
             <Button
-                android:id="@+id/test_finish_button"
+                android:id="@+id/test_answer_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test_finish_button"
+                android:text="@string/test_answer_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/test_next_button"
+                app:layout_constraintTop_toBottomOf="@+id/test_front_front_text"
+                app:layout_constraintBottom_toTopOf="@+id/test_front_back_text" />
+
+            <TextView
+                android:id="@+id/test_front_front_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@{card.front}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/test_answer_button"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 
 import java.util.ArrayList;
@@ -20,14 +22,16 @@ import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
 import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
 public class TestFrontActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    private ActivityTestBinding binding;
+    private TestContentsFrontBindingImpl binding;
 
     private ArrayList<Card> cardData;
     private int cardIndex = 0;
+//    private View contentView;
 
 //    public final static String TEST_TYPE_ARG = "test_type";
 
@@ -36,7 +40,8 @@ public class TestFrontActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+        setContentView(R.layout.activity_test);
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
 
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
@@ -56,6 +61,11 @@ public class TestFrontActivity extends AppCompatActivity {
     }
 
     private void initTesting() {
+        // Change contents based on  test mode.
+        LinearLayout layout = findViewById(R.id.test_contents_card);  // Get old contents.
+        layout.removeAllViews();  // Remove old contents.
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.test_contents_front, layout, true);
+            // Change old contents to new contents and get binding.
 
         displayCard();
     }
@@ -71,19 +81,19 @@ public class TestFrontActivity extends AppCompatActivity {
             TextView answerText = findViewById(R.id.test_front_front_text);
             answerText.setVisibility(View.INVISIBLE);
 
-            Button buttonNext = findViewById(R.id.test_front_next_button);
+            Button buttonNext = findViewById(R.id.test_next_button);
             buttonNext.setVisibility(View.INVISIBLE);
             buttonNext.setOnClickListener(v -> {
                 displayCard();
             });
 
-            Button buttonFinish = findViewById(R.id.test_front_finish_button);
+            Button buttonFinish = findViewById(R.id.test_finish_button);
             buttonFinish.setVisibility(View.INVISIBLE);
             buttonFinish.setOnClickListener(v -> {
                 finishTesting();
             });
 
-            Button buttonAnswer = findViewById(R.id.test_front_answer_button);
+            Button buttonAnswer = findViewById(R.id.test_answer_button);
             buttonAnswer.setOnClickListener(v -> {
                 // If "Answer" button clicked, make answer text and finish button visible.
                 answerText.setVisibility(View.VISIBLE);
