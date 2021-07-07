@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,7 +24,10 @@ import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
 public class TestFrontActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
 
+    private ActivityTestBinding binding;
+
     private ArrayList<Card> cardData;
+    private int cardIndex = 0;
 
 //    public final static String TEST_TYPE_ARG = "test_type";
 
@@ -31,14 +36,13 @@ public class TestFrontActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
 
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
         cardData = cardDataFile.getCardData();
 
-        Card card = cardData.get(0);
-        binding.setCard(card);
+        initTesting();
 
 //        // Set create button and register intent.
 //        Button buttonNewCard = findViewById(R.id.test_front);
@@ -49,6 +53,54 @@ public class TestFrontActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            // 特に結果を得ることは想定していない
 //        });
+    }
+
+    private void initTesting() {
+
+        displayCard();
+    }
+
+    private void displayCard() {
+        if (cardData.size() > cardIndex) {
+            // Set card data to layout by using "data binding".
+            Card card = cardData.get(cardIndex);
+            binding.setCard(card);
+            cardIndex++;
+
+            // Answer text, next button and finish button are invisible at first.
+            TextView answerText = findViewById(R.id.test_front_front_text);
+            answerText.setVisibility(View.INVISIBLE);
+
+            Button buttonNext = findViewById(R.id.test_front_next_button);
+            buttonNext.setVisibility(View.INVISIBLE);
+            buttonNext.setOnClickListener(v -> {
+                displayCard();
+            });
+
+            Button buttonFinish = findViewById(R.id.test_front_finish_button);
+            buttonFinish.setVisibility(View.INVISIBLE);
+            buttonFinish.setOnClickListener(v -> {
+                finishTesting();
+            });
+
+            Button buttonAnswer = findViewById(R.id.test_front_answer_button);
+            buttonAnswer.setOnClickListener(v -> {
+                // If "Answer" button clicked, make answer text and finish button visible.
+                answerText.setVisibility(View.VISIBLE);
+                buttonFinish.setVisibility(View.VISIBLE);
+
+                // If there are remaining data, make next button visible.
+                if (cardData.size() > cardIndex) {
+                    buttonNext.setVisibility(View.VISIBLE);
+                }
+            });
+        } else {
+            finishTesting();
+        }
+    }
+
+    private void finishTesting() {
+        Log.d(TAG, "finish!!!");
     }
 
     @Override
