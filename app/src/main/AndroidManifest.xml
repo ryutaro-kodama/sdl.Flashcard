@@ -22,6 +22,7 @@
         <activity android:name=".test.TestMainActivity" />
         <activity android:name=".test.TestFrontActivity" />
         <activity android:name=".test.TestBackActivity" />
+        <activity android:name=".test.TestBackChoiceActivity" />
     </application>
 
 </manifest>

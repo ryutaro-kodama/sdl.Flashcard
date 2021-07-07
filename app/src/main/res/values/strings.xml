@@ -17,9 +17,9 @@
 
     <!--  Strings used for fragments for main test page  -->
     <string name="test_front">Hide Front Text</string>
-    <string name="test_back">Hide front text</string>
-    <string name="test_back_from_choice">Hide Back Text</string>
-    <string name="test_with_friend">Hide TRUE back text</string>
+    <string name="test_back">Hide Back text</string>
+    <string name="test_back_from_choice">Hide Back Text (Choice)</string>
+    <string name="test_with_friend">Hide Back text (With Friend)</string>
 
     <!--  Strings used for fragments for test page  -->
     <string name="test_answer_button">Check Answer</string>

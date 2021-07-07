@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Card {
     public static final String FRONT = "front";
@@ -47,6 +48,22 @@ public class Card {
 
     public String getBack_false2() {
         return back_false2;
+    }
+
+    public boolean hasNoChoice() {
+        return back_false1.equals("") && back_false2.equals("");
+    }
+
+    public ArrayList<String> getChoiceList() {
+        ArrayList<String> choiceList = new ArrayList<>();
+
+        choiceList.add(back_true);
+        choiceList.add(back_false1);
+        if (!back_false2.equals("")){
+            choiceList.add(back_false2);
+        }
+
+        return choiceList;
     }
 
     public void writeCard(JsonWriter writer) throws IOException {

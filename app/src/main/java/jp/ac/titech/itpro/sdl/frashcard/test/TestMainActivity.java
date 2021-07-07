@@ -37,6 +37,12 @@ public class TestMainActivity extends AppCompatActivity {
             Intent intent = new Intent(TestMainActivity.this, TestBackActivity.class);
             startActivity(intent);
         });
+
+        Button buttonTestBackChoice = findViewById(R.id.test_back_from_choice);
+        buttonTestBackChoice.setOnClickListener(v -> {
+            Intent intent = new Intent(TestMainActivity.this, TestBackChoiceActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
