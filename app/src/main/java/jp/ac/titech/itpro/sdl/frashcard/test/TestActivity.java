@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,22 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected abstract void initTesting();
+
+    // Change contents based on test mode and return the layout's data binding object.
+    protected ViewDataBinding setContent(int newLayoutId) {
+        Log.d(TAG, "setContent");
+
+        // Get old contents.
+        LinearLayout oldLayout = findViewById(R.id.test_contents_card);
+
+        // Remove old contents.
+        oldLayout.removeAllViews();
+
+        // Change old contents to new contents and get binding.
+        ViewDataBinding binding = DataBindingUtil.inflate(getLayoutInflater(), newLayoutId, oldLayout, true);
+
+        return binding;
+    }
 
     protected abstract void displayCard();
 

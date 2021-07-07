@@ -18,18 +18,16 @@ public class TestBackActivity extends TestActivity {
 
     private TestContentsBackBindingImpl binding;
 
+    @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
 
-        // Change contents based on  test mode.
-        LinearLayout layout = findViewById(R.id.test_contents_card);  // Get old contents.
-        layout.removeAllViews();  // Remove old contents.
-        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.test_contents_back, layout, true);
-            // Change old contents to new contents and get binding.
+        binding = (TestContentsBackBindingImpl) setContent(R.layout.test_contents_back);
 
         displayCard();
     }
 
+    @Override
     protected void displayCard() {
         Log.d(TAG, "displayCard");
 
@@ -71,6 +69,7 @@ public class TestBackActivity extends TestActivity {
         }
     }
 
+    @Override
     protected void finishTesting() {
         Log.d(TAG, "finish!!!");
     }
