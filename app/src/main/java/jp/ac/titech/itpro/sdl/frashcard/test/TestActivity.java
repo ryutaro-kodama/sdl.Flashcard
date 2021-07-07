@@ -1,0 +1,75 @@
+package jp.ac.titech.itpro.sdl.frashcard.test;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.databinding.DataBindingUtil;
+
+import java.util.ArrayList;
+
+import jp.ac.titech.itpro.sdl.frashcard.Card;
+import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
+import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
+import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
+import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
+
+public abstract class TestActivity extends AppCompatActivity {
+    private final static String TAG = TestActivity.class.getSimpleName();
+
+    protected TestContentsFrontBindingImpl binding;
+
+    protected ArrayList<Card> cardData;
+    protected int cardIndex = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
+        setContentView(R.layout.activity_test);
+
+        // Load card data.
+        CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
+        cardData = cardDataFile.getCardData();
+
+        initTesting();
+    }
+
+    protected abstract void initTesting();
+
+    protected abstract void displayCard();
+
+    protected abstract void finishTesting();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}

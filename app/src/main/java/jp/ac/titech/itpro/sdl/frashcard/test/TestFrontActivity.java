@@ -1,51 +1,23 @@
 package jp.ac.titech.itpro.sdl.frashcard.test;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 
-import java.util.ArrayList;
-
 import jp.ac.titech.itpro.sdl.frashcard.Card;
-import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
-import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
-import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
-public class TestFrontActivity extends AppCompatActivity {
-    private final static String TAG = MainActivity.class.getSimpleName();
 
-    private TestContentsFrontBindingImpl binding;
+public class TestFrontActivity extends TestActivity {
+    private final static String TAG = TestFrontActivity.class.getSimpleName();
 
-    private ArrayList<Card> cardData;
-    private int cardIndex = 0;
+    protected void initTesting() {
+        Log.d(TAG, "initTesting");
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
-        setContentView(R.layout.activity_test);
-
-        // Load card data.
-        CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
-        cardData = cardDataFile.getCardData();
-
-        initTesting();
-    }
-
-    private void initTesting() {
         // Change contents based on  test mode.
         LinearLayout layout = findViewById(R.id.test_contents_card);  // Get old contents.
         layout.removeAllViews();  // Remove old contents.
@@ -55,7 +27,9 @@ public class TestFrontActivity extends AppCompatActivity {
         displayCard();
     }
 
-    private void displayCard() {
+    protected void displayCard() {
+        Log.d(TAG, "displayCard");
+
         if (cardData.size() > cardIndex) {
             // Set card data to layout by using "data binding".
             Card card = cardData.get(cardIndex);
@@ -94,29 +68,7 @@ public class TestFrontActivity extends AppCompatActivity {
         }
     }
 
-    private void finishTesting() {
+    protected void finishTesting() {
         Log.d(TAG, "finish!!!");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
