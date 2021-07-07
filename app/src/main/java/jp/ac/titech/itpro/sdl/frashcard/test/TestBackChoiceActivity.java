@@ -3,7 +3,6 @@ package jp.ac.titech.itpro.sdl.frashcard.test;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,6 +35,9 @@ public class TestBackChoiceActivity extends TestActivity {
         }
         binding.setCard(card);
 
+        // Next button and finish button are invisible at first.
+        setNextAndFinishButton();
+
         // Shuffle choices.
         ArrayList<String> choiceList = card.getChoiceList();
         Collections.shuffle(choiceList);
@@ -43,20 +45,6 @@ public class TestBackChoiceActivity extends TestActivity {
         // Bind data of choices.
         binding.setChoice1(choiceList.get(0));
         binding.setChoice2(choiceList.get(1));
-
-        Button buttonNext = findViewById(R.id.test_next_button);
-        Button buttonFinish = findViewById(R.id.test_finish_button);
-
-        // Next button and finish button are invisible at first.
-        setInvisible(buttonNext, buttonFinish);
-
-        buttonNext.setOnClickListener(v -> {
-            displayCard();
-        });
-
-        buttonFinish.setOnClickListener(v -> {
-            finishTesting();
-        });
 
         // Create listener object which is called when choices are clicked.
         Card finalCard = card;
@@ -71,13 +59,8 @@ public class TestBackChoiceActivity extends TestActivity {
                     clickedIncorrectChoice();
                 }
 
-                // If "Answer" button clicked, make answer text and finish button visible.
-                buttonFinish.setVisibility(View.VISIBLE);
-
-                // If there are remaining data, make next button visible.
-                if (cardData.size() > cardIndex) {
-                    buttonNext.setVisibility(View.VISIBLE);
-                }
+                // If "Answer" button clicked, make finish button and answer text visible.
+                visibleNextAndFinishButton();
             }
         };
 

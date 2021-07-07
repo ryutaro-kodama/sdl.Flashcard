@@ -28,31 +28,18 @@ public class TestBackActivity extends TestActivity {
         // Set card data to layout by using "data binding".
         binding.setCard(getNextCard());
 
+        // Next button and finish button are invisible at first.
+        setNextAndFinishButton();
+
+        // Answer text is invisible at first.
         TextView textAnswer = findViewById(R.id.test_answer_text);
-        Button buttonNext = findViewById(R.id.test_next_button);
-        Button buttonFinish = findViewById(R.id.test_finish_button);
-
-        // Answer text, next button and finish button are invisible at first.
-        setInvisible(textAnswer, buttonNext, buttonFinish);
-
-        buttonNext.setOnClickListener(v -> {
-            displayCard();
-        });
-
-        buttonFinish.setOnClickListener(v -> {
-            finishTesting();
-        });
+        textAnswer.setVisibility(View.INVISIBLE);
 
         Button buttonAnswer = findViewById(R.id.test_answer_button);
         buttonAnswer.setOnClickListener(v -> {
-            // If "Answer" button clicked, make answer text and finish button visible.
+            // If "Answer" button clicked, make next button, finish button and answer text visible.
+            visibleNextAndFinishButton();
             textAnswer.setVisibility(View.VISIBLE);
-            buttonFinish.setVisibility(View.VISIBLE);
-
-            // If there are remaining data, make next button visible.
-            if (cardData.size() > cardIndex) {
-                buttonNext.setVisibility(View.VISIBLE);
-            }
         });
     }
 

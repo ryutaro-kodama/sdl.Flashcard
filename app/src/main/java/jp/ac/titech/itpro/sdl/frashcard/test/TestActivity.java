@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,9 @@ import jp.ac.titech.itpro.sdl.frashcard.R;
 
 public abstract class TestActivity extends AppCompatActivity {
     private final static String TAG = TestActivity.class.getSimpleName();
+
+    protected Button buttonNext;
+    protected Button buttonFinish;
 
     protected ArrayList<Card> cardData;
     protected int cardIndex = 0;
@@ -69,9 +73,35 @@ public abstract class TestActivity extends AppCompatActivity {
         return card;
     }
 
-    protected void setInvisible(View... views) {
-        for (View view: views) {
-            view.setVisibility(View.INVISIBLE);
+    protected void setNextAndFinishButton() {
+        buttonNext = findViewById(R.id.test_next_button);
+        buttonNext.setVisibility(View.INVISIBLE);
+        buttonNext.setOnClickListener(v -> {
+            onClickNextButton();
+        });
+
+        buttonFinish = findViewById(R.id.test_finish_button);
+        buttonFinish.setVisibility(View.INVISIBLE);
+        buttonFinish.setOnClickListener(v -> {
+            onClickFinishButton();
+        });
+    }
+
+    protected void onClickNextButton() {
+        displayCard();
+    }
+
+    protected void onClickFinishButton() {
+        finishTesting();
+    }
+
+    // Make the next and finish button visible.
+    protected void visibleNextAndFinishButton() {
+        buttonFinish.setVisibility(View.VISIBLE);
+
+        // If there are remaining data, make next button visible.
+        if (cardData.size() > cardIndex) {
+            buttonNext.setVisibility(View.VISIBLE);
         }
     }
 
