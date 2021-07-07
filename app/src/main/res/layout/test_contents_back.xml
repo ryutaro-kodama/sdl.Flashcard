@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/test_back_front_text"
+                android:id="@+id/test_question_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size"
@@ -37,11 +37,11 @@
                 android:text="@string/test_answer_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/test_back_front_text"
-                app:layout_constraintBottom_toTopOf="@+id/test_back_back_text" />
+                app:layout_constraintTop_toBottomOf="@+id/test_question_text"
+                app:layout_constraintBottom_toTopOf="@+id/test_answer_text" />
 
             <TextView
-                android:id="@+id/test_back_back_text"
+                android:id="@+id/test_answer_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size"

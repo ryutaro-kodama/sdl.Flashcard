@@ -1,17 +1,13 @@
 package jp.ac.titech.itpro.sdl.frashcard.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
@@ -19,11 +15,7 @@ import java.util.ArrayList;
 
 import jp.ac.titech.itpro.sdl.frashcard.Card;
 import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
-import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
-import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.ActivityTestBinding;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
 public abstract class TestActivity extends AppCompatActivity {
     private final static String TAG = TestActivity.class.getSimpleName();
@@ -42,6 +34,13 @@ public abstract class TestActivity extends AppCompatActivity {
         cardData = cardDataFile.getCardData();
 
         initTesting();
+
+        if (cardData.size() > cardIndex) {
+            // Display first Card
+            displayCard();
+        } else {
+            finishTesting();
+        }
     }
 
     protected abstract void initTesting();
@@ -63,6 +62,18 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected abstract void displayCard();
+
+    protected Card getNextCard() {
+        Card card = cardData.get(cardIndex);
+        cardIndex++;
+        return card;
+    }
+
+    protected void setInvisible(View... views) {
+        for (View view: views) {
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
 
     protected abstract void finishTesting();
 

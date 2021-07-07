@@ -3,12 +3,8 @@ package jp.ac.titech.itpro.sdl.frashcard.test;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.databinding.DataBindingUtil;
-
-import jp.ac.titech.itpro.sdl.frashcard.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
@@ -23,50 +19,41 @@ public class TestFrontActivity extends TestActivity {
         Log.d(TAG, "initTesting");
 
         binding = (TestContentsFrontBindingImpl) setContent(R.layout.test_contents_front);
-
-        displayCard();
     }
 
     @Override
     protected void displayCard() {
         Log.d(TAG, "displayCard");
 
-        if (cardData.size() > cardIndex) {
-            // Set card data to layout by using "data binding".
-            Card card = cardData.get(cardIndex);
-            binding.setCard(card);
-            cardIndex++;
+        // Set card data to layout by using "data binding".
+        binding.setCard(getNextCard());
 
-            // Answer text, next button and finish button are invisible at first.
-            TextView answerText = findViewById(R.id.test_front_front_text);
-            answerText.setVisibility(View.INVISIBLE);
+        TextView textAnswer = findViewById(R.id.test_answer_text);
+        Button buttonNext = findViewById(R.id.test_next_button);
+        Button buttonFinish = findViewById(R.id.test_finish_button);
 
-            Button buttonNext = findViewById(R.id.test_next_button);
-            buttonNext.setVisibility(View.INVISIBLE);
-            buttonNext.setOnClickListener(v -> {
-                displayCard();
-            });
+        // Answer text, next button and finish button are invisible at first.
+        setInvisible(textAnswer, buttonNext, buttonFinish);
 
-            Button buttonFinish = findViewById(R.id.test_finish_button);
-            buttonFinish.setVisibility(View.INVISIBLE);
-            buttonFinish.setOnClickListener(v -> {
-                finishTesting();
-            });
+        buttonNext.setOnClickListener(v -> {
+            displayCard();
+        });
 
-            Button buttonAnswer = findViewById(R.id.test_answer_button);
-            buttonAnswer.setOnClickListener(v -> {
-                // If "Answer" button clicked, make answer text and finish button visible.
-                answerText.setVisibility(View.VISIBLE);
-                buttonFinish.setVisibility(View.VISIBLE);
-
-                // If there are remaining data, make next button visible.
-                if (cardData.size() > cardIndex) {
-                    buttonNext.setVisibility(View.VISIBLE);
-                }
-            });
-        } else {
+        buttonFinish.setOnClickListener(v -> {
             finishTesting();
-        }
+        });
+
+        Button buttonAnswer = findViewById(R.id.test_answer_button);
+        buttonAnswer.setOnClickListener(v -> {
+            // If "Answer" button clicked, make answer text and finish button visible.
+            textAnswer.setVisibility(View.VISIBLE);
+            buttonFinish.setVisibility(View.VISIBLE);
+
+            // If there are remaining data, make next button visible.
+            if (cardData.size() > cardIndex) {
+                buttonNext.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
