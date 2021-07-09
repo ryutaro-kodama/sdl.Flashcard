@@ -26,6 +26,27 @@
     <string name="test_next_button">Next Card</string>
     <string name="test_finish_button">Finish Testing</string>
 
+    <!--  Strings used for fragments for test with friend home page  -->
+    <string name="test_with_friend_home_connect">Connect Other Device</string>
+    <string name="test_with_friend_home_accept">Accept Connection</string>
+
+    <string name="toast_bluetooth_not_supported">This device does not support Bluetooth</string>
+    <string name="toast_bluetooth_disabled">Bluetooth should be enabled</string>
+    <string name="toast_scanning_requires_permission">Scanning requires permission %s</string>
+    <string name="toast_connection_failed">Connection failed</string>
+    <string name="toast_connection_closed">Connection closed</string>
+    <string name="toast_empty_message">Empty message</string>
+
+    <!--  Strings used for fragments for scanning page  -->
+    <string name="format_dev_name">%1$s %2$s</string>
+    <string name="scan_status_stopped">Select a device you want to connect to</string>
+    <string name="scan_status_scanning">Scanning in progress</string>
+    <string name="alert_connection_confirmation">Do you really want to connect to this device?</string>
+
+    <!--  Strings used for menu for scanning page  -->
+    <string name="menu_scan_scan">Scan</string>
+    <string name="menu_scan_stop">Stop</string>
+
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

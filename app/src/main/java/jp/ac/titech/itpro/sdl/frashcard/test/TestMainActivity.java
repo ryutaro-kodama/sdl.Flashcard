@@ -43,6 +43,12 @@ public class TestMainActivity extends AppCompatActivity {
             Intent intent = new Intent(TestMainActivity.this, TestBackChoiceActivity.class);
             startActivity(intent);
         });
+
+        Button buttonTestWithFriend = findViewById(R.id.test_with_friend);
+        buttonTestWithFriend.setOnClickListener(v -> {
+            Intent intent = new Intent(TestMainActivity.this, TestWithFriendHomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
