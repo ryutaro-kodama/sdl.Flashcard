@@ -33,11 +33,15 @@ public abstract class TestActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_test);
 
+        initTesting();
+
+        loadCard();
+    }
+
+    protected void loadCard() {
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
         cardData = cardDataFile.getCardData();
-
-        initTesting();
 
         if (cardData.size() > cardIndex) {
             // Display first Card
