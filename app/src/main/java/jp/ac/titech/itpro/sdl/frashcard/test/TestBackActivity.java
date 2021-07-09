@@ -10,7 +10,7 @@ import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackBindingImpl;
 
 
 public class TestBackActivity extends TestActivity {
-    private final static String TAG = TestFrontActivity.class.getSimpleName();
+    private final static String TAG = TestBackActivity.class.getSimpleName();
 
     private TestContentsBackBindingImpl binding;
 

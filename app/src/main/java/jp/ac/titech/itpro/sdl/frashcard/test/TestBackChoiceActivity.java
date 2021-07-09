@@ -13,7 +13,7 @@ import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBindin
 
 
 public class TestBackChoiceActivity extends TestActivity {
-    private final static String TAG = TestFrontActivity.class.getSimpleName();
+    private final static String TAG = TestBackChoiceActivity.class.getSimpleName();
 
     private TestContentsBackChoiceBinding binding;
 

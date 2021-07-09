@@ -47,6 +47,8 @@ public class TestWithFriendActivity extends TestActivity {
     protected void initTesting() {
         Log.d(TAG, "initTesting");
         binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
+
+        socket = BluetoothSocketSingleton.getSocketAndSetNull();
     }
 
     @Override
