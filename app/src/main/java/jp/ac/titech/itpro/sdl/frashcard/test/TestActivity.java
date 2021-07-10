@@ -41,9 +41,10 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void displayFirstCard() {
+        Card card = getNextCard();
         if (isRemainData()) {
             // Display first Card
-            displayCard();
+            displayCard(card);
         } else {
             finishTesting();
         }
@@ -73,7 +74,7 @@ public abstract class TestActivity extends AppCompatActivity {
         return binding;
     }
 
-    protected abstract void displayCard();
+    protected abstract void displayCard(Card card);
 
     protected Card getNextCard() {
         Card card = cardData.get(cardIndex);
@@ -96,7 +97,8 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void onClickNextButton() {
-        displayCard();
+        Card card = getNextCard();
+        displayCard(card);
     }
 
     protected void onClickFinishButton() {

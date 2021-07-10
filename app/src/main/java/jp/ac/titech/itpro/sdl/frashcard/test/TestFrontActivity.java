@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
 
@@ -21,11 +22,11 @@ public class TestFrontActivity extends TestActivity {
     }
 
     @Override
-    protected void displayCard() {
+    protected void displayCard(Card card) {
         Log.d(TAG, "displayCard");
 
         // Set card data to layout by using "data binding".
-        binding.setCard(getNextCard());
+        binding.setCard(card);
 
         // Next button and finish button are invisible at first.
         setNextAndFinishButton();

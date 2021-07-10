@@ -38,14 +38,13 @@ public class TestBackChoiceActivity extends TestActivity {
 //    }
 
     @Override
-    protected void displayCard() {
+    protected void displayCard(Card card) {
         Log.d(TAG, "displayCard");
         if (imageView != null) {
             imageView.setVisibility(View.INVISIBLE);
         }
 
         // Set card data to layout by using "data binding".
-        Card card = getNextCard();
         binding.setCard(card);
 
         // Next button and finish button are invisible at first.
