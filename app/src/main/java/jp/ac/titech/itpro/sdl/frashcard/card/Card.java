@@ -6,6 +6,7 @@ import android.util.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Card implements Parcelable {
     public static final String FRONT = "front";
@@ -16,6 +17,7 @@ public class Card implements Parcelable {
     private String backTrue;
     private String backFalse1;
     private String backFalse2;
+    private int choiceOrder = -1;
 
     public Card(String front, String backTrue, String backFalse1, String backFalse2) {
         this.front = front;
@@ -59,13 +61,40 @@ public class Card implements Parcelable {
         return backFalse1.equals("") && backFalse2.equals("");
     }
 
+    public boolean hasTwoChoice() { return backFalse2.equals(""); }
+
+    public void setChoiceOrder() {
+        Random random = new Random();
+        if (hasTwoChoice()) {
+            // If 'backFalse2' is nothing, get 1 or 2;
+            choiceOrder = random.nextInt(2) + 1;
+        } else {
+            // If else, get 3 ~ 8.
+            choiceOrder = random.nextInt(6) + 3;
+        }
+    }
+
+    public void setChoiceOrder(int num) {
+        choiceOrder = num;
+    }
+
     public ArrayList<String> getChoiceList() {
+        if (choiceOrder == -1) {
+            setChoiceOrder();
+        }
         ArrayList<String> choiceList = new ArrayList<>();
 
-        choiceList.add(backTrue);
-        choiceList.add(backFalse1);
-        if (!backFalse2.equals("")){
-            choiceList.add(backFalse2);
+        // Based on value of 'choiceOrder', decide sequence of choices.
+        switch (choiceOrder) {
+            case 1: choiceList.add(getBackTrue()); choiceList.add(getBackFalse1()); break;
+            case 2: choiceList.add(getBackFalse1()); choiceList.add(getBackTrue()); break;
+            case 3: choiceList.add(getBackTrue()); choiceList.add(getBackFalse1()); choiceList.add(getBackFalse2()); break;
+            case 4: choiceList.add(getBackTrue()); choiceList.add(getBackFalse2()); choiceList.add(getBackFalse1()); break;
+            case 5: choiceList.add(getBackFalse1()); choiceList.add(getBackTrue()); choiceList.add(getBackFalse2()); break;
+            case 6: choiceList.add(getBackFalse1()); choiceList.add(getBackFalse2()); choiceList.add(getBackTrue()); break;
+            case 7: choiceList.add(getBackFalse2()); choiceList.add(getBackTrue()); choiceList.add(getBackFalse1()); break;
+            case 8: choiceList.add(getBackFalse2()); choiceList.add(getBackFalse1()); choiceList.add(getBackTrue()); break;
+            default: assert false; break;
         }
 
         return choiceList;

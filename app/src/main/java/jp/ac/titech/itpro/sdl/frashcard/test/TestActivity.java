@@ -36,19 +36,23 @@ public abstract class TestActivity extends AppCompatActivity {
         initTesting();
 
         loadCard();
+
+        displayFirstCard();
+    }
+
+    protected void displayFirstCard() {
+        if (isRemainData()) {
+            // Display first Card
+            displayCard();
+        } else {
+            finishTesting();
+        }
     }
 
     protected void loadCard() {
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
         cardData = cardDataFile.getCardData();
-
-        if (cardData.size() > cardIndex) {
-            // Display first Card
-            displayCard();
-        } else {
-            finishTesting();
-        }
     }
 
     protected abstract void initTesting();

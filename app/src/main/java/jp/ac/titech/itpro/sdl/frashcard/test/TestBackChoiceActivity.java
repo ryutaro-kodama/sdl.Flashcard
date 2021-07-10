@@ -25,17 +25,17 @@ public class TestBackChoiceActivity extends TestActivity {
         binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
     }
 
-    @Override
-    protected Card getNextCard() {
-        // Get next card from card data file.
-        Card card = super.getNextCard();
-        while (card.hasNoChoice()) {
-            // Skip while the card has choice.
-            card = super.getNextCard();
-        }
-
-        return card;
-    }
+//    @Override
+//    protected Card getNextCard() {
+//        // Get next card from card data file.
+//        Card card = super.getNextCard();
+//        while (card.hasNoChoice()) {
+//            // Skip while the card has choice.
+//            card = super.getNextCard();
+//        }
+//
+//        return card;
+//    }
 
     @Override
     protected void displayCard() {
@@ -53,11 +53,7 @@ public class TestBackChoiceActivity extends TestActivity {
 
         // Shuffle choices.
         ArrayList<String> choiceList = card.getChoiceList();
-        Collections.shuffle(choiceList);
-
-        // Bind data of choices.
-        binding.setChoice1(choiceList.get(0));
-        binding.setChoice2(choiceList.get(1));
+        binding.setChoices(choiceList.toArray(new String[choiceList.size()]));
 
         // Create listener object which is called when choices are clicked.
         View.OnClickListener buttonClick = new View.OnClickListener() {
@@ -87,13 +83,11 @@ public class TestBackChoiceActivity extends TestActivity {
         buttonChoice1.setOnClickListener(buttonClick);
         Button buttonChoice2 = findViewById(R.id.test_choice2_button);
         buttonChoice2.setOnClickListener(buttonClick);
-
-        // When choices are three, set third choice.
         Button buttonChoice3 = findViewById(R.id.test_choice3_button);
-        if (choiceList.size() == 3) {
-            binding.setChoice3(choiceList.get(2));
-            buttonChoice3.setOnClickListener(buttonClick);
-        } else {
+        buttonChoice3.setOnClickListener(buttonClick);
+
+        // When choices are 2, don't set third choice.
+        if (card.hasTwoChoice()) {
             buttonChoice3.setVisibility(View.GONE);
         }
     }
@@ -113,6 +107,19 @@ public class TestBackChoiceActivity extends TestActivity {
             assert false;
             return -1;
         }
+    }
+
+    @Override
+    protected boolean isRemainData() {
+        // If There is card which has choices, return true.
+        for (int index = cardIndex; index < cardData.size(); index++){
+            if(!cardData.get(index).hasNoChoice()){
+                cardIndex = index;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
