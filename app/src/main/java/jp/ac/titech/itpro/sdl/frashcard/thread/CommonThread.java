@@ -16,9 +16,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
-import jp.ac.titech.itpro.sdl.frashcard.card.Card;
-import jp.ac.titech.itpro.sdl.frashcard.card.CardReader;
-import jp.ac.titech.itpro.sdl.frashcard.card.CardWriter;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationReader;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationWriter;
