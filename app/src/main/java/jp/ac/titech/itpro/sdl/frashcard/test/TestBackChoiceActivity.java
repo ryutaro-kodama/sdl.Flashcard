@@ -3,6 +3,7 @@ package jp.ac.titech.itpro.sdl.frashcard.test;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +17,7 @@ public class TestBackChoiceActivity extends TestActivity {
     private final static String TAG = TestBackChoiceActivity.class.getSimpleName();
 
     private TestContentsBackChoiceBinding binding;
+    private ImageView imageView = null;
 
     @Override
     protected void initTesting() {
@@ -24,15 +26,26 @@ public class TestBackChoiceActivity extends TestActivity {
     }
 
     @Override
+    protected Card getNextCard() {
+        // Get next card from card data file.
+        Card card = super.getNextCard();
+        while (card.hasNoChoice()) {
+            // Skip while the card has choice.
+            card = super.getNextCard();
+        }
+
+        return card;
+    }
+
+    @Override
     protected void displayCard() {
         Log.d(TAG, "displayCard");
+        if (imageView != null) {
+            imageView.setVisibility(View.INVISIBLE);
+        }
 
         // Set card data to layout by using "data binding".
         Card card = getNextCard();
-        while (card.hasNoChoice()) {
-            // Skip while the card has choice.
-            card = getNextCard();
-        }
         binding.setCard(card);
 
         // Next button and finish button are invisible at first.
@@ -47,19 +60,24 @@ public class TestBackChoiceActivity extends TestActivity {
         binding.setChoice2(choiceList.get(1));
 
         // Create listener object which is called when choices are clicked.
-        Card finalCard = card;
         View.OnClickListener buttonClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String clickedChoice = ((Button) view).getText().toString();
 
-                if (clickedChoice.equals(finalCard.getBackTrue())) {
-                    clickedCorrectChoice();
+                // Get "ImageView" to display correct or incorrect.
+                int imageViewId = getImageViewId(view);
+                imageView = findViewById(imageViewId);
+                imageView.setVisibility(View.VISIBLE);
+
+                // Set image to display correct or incorrect..
+                if (clickedChoice.equals(card.getBackTrue())) {
+                    imageView.setImageResource(R.drawable.correct);
                 } else {
-                    clickedIncorrectChoice();
+                    imageView.setImageResource(R.drawable.incorrect);
                 }
 
-                // If "Answer" button clicked, make finish button and answer text visible.
+                // Make next button and finish button visible.
                 visibleNextAndFinishButton();
             }
         };
@@ -80,12 +98,21 @@ public class TestBackChoiceActivity extends TestActivity {
         }
     }
 
-    private void clickedCorrectChoice() {
-        Log.d(TAG, "correct!!!");
-    }
+    private int getImageViewId(View view) {
+        Log.d(TAG, "clickedCorrectChoice");
 
-    private void clickedIncorrectChoice() {
-        Log.d(TAG, "incorrect!!!");
+        int buttonId = view.getId();
+
+        if (buttonId == R.id.test_choice1_button) {
+            return R.id.test_choice1_image;
+        } else if (buttonId == R.id.test_choice2_button) {
+            return R.id.test_choice2_image;
+        } else if (buttonId == R.id.test_choice3_button) {
+            return R.id.test_choice3_image;
+        } else {
+            assert false;
+            return -1;
+        }
     }
 
     @Override
