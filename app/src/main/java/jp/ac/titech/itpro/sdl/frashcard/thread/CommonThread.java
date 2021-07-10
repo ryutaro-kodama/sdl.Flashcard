@@ -83,7 +83,7 @@ public class CommonThread extends Thread {
         }
     }
 
-    void close() {
+    public void close() {
         Log.d(TAG, "close");
         try {
             writer.endArray();

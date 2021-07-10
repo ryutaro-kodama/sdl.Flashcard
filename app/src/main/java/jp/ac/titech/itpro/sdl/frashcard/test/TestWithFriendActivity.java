@@ -297,5 +297,14 @@ public abstract class TestWithFriendActivity extends TestActivity {
         Log.d(TAG, "finishTesting");
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+        if (thread != null) {
+            thread.close();
+        }
+    }
 }
 
