@@ -1,26 +1,55 @@
 package jp.ac.titech.itpro.sdl.frashcard.test;
 
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.JsonReader;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.ref.WeakReference;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.frashcard.card.CardReader;
+import jp.ac.titech.itpro.sdl.frashcard.card.CardWriter;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
+import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
+import jp.ac.titech.itpro.sdl.frashcard.test.connection.ScanActivity;
+import jp.ac.titech.itpro.sdl.frashcard.thread.CommonThread;
 
-
-public class TestBackChoiceActivity extends TestActivity {
-    private final static String TAG = TestBackChoiceActivity.class.getSimpleName();
-
-    private TestContentsBackChoiceBinding binding;
+public class TestWithFriendActivitySender extends TestWithFriendActivity {
+    private final static String TAG = TestWithFriendActivitySender.class.getSimpleName();
 
     @Override
-    protected void initTesting() {
-        Log.d(TAG, "initTesting");
-        binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
+    protected Card getNextCard() {
+        // Get next card from card data file.
+        Card card = super.getNextCard();
+        while (card.hasNoChoice()) {
+            // Skip while the card has choice.
+            card = super.getNextCard();
+        }
+
+        // Send card to receiver.
+        thread.send(communicationDataFactory.make(card));
+        return card;
     }
 
     @Override
@@ -29,10 +58,6 @@ public class TestBackChoiceActivity extends TestActivity {
 
         // Set card data to layout by using "data binding".
         Card card = getNextCard();
-        while (card.hasNoChoice()) {
-            // Skip while the card has choice.
-            card = getNextCard();
-        }
         binding.setCard(card);
 
         // Next button and finish button are invisible at first.
@@ -47,13 +72,12 @@ public class TestBackChoiceActivity extends TestActivity {
         binding.setChoice2(choiceList.get(1));
 
         // Create listener object which is called when choices are clicked.
-        Card finalCard = card;
         View.OnClickListener buttonClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String clickedChoice = ((Button) view).getText().toString();
 
-                if (clickedChoice.equals(finalCard.getBackTrue())) {
+                if (clickedChoice.equals(card.getBackTrue())) {
                     clickedCorrectChoice();
                 } else {
                     clickedIncorrectChoice();
@@ -86,6 +110,11 @@ public class TestBackChoiceActivity extends TestActivity {
 
     private void clickedIncorrectChoice() {
         Log.d(TAG, "incorrect!!!");
+    }
+
+    // Send your answer to your friend.
+    private void sendYourAnswer(int answer) {
+        thread.send(communicationDataFactory.makeAnswer(answer));
     }
 
     @Override

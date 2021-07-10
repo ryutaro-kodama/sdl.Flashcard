@@ -2,36 +2,16 @@ package jp.ac.titech.itpro.sdl.frashcard.test;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.ref.WeakReference;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
@@ -97,8 +77,15 @@ public class TestWithFriendHomeActivity  extends AppCompatActivity {
         // Save the socket.
         BluetoothSocketSingleton.setSocket(socket);
 
-        Intent intent = new Intent(this, TestWithFriendActivity.class);
-//        agent.isSenderOrReceiver();
+        // According to agent, start testing activity.
+        Intent intent = null;
+        if (agent instanceof ClientAgent) {
+            intent = new Intent(this, TestWithFriendActivitySender.class);
+        } else if (agent instanceof ServerAgent) {
+            intent = new Intent(this, TestWithFriendActivityReceiver.class);
+        } else {
+            assert false;
+        }
         startActivity(intent);
     }
 

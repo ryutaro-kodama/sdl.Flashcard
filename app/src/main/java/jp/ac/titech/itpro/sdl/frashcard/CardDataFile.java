@@ -5,20 +5,18 @@ import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_FALSE1;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_FALSE2;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_TRUE;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.FRONT;
+import jp.ac.titech.itpro.sdl.frashcard.card.Card;
+
+import static jp.ac.titech.itpro.sdl.frashcard.card.Card.BACK_FALSE1;
+import static jp.ac.titech.itpro.sdl.frashcard.card.Card.BACK_FALSE2;
+import static jp.ac.titech.itpro.sdl.frashcard.card.Card.BACK_TRUE;
+import static jp.ac.titech.itpro.sdl.frashcard.card.Card.FRONT;
 
 public class CardDataFile {
     private final static String TAG = CardDataFile.class.getSimpleName();

@@ -30,6 +30,8 @@
         <activity android:name=".test.TestBackChoiceActivity" />
         <activity android:name=".test.TestWithFriendHomeActivity" />
         <activity android:name=".test.TestWithFriendActivity" />
+        <activity android:name=".test.TestWithFriendActivityReceiver" />
+        <activity android:name=".test.TestWithFriendActivitySender" />
         <activity android:name=".test.connection.ScanActivity" />
     </application>
 

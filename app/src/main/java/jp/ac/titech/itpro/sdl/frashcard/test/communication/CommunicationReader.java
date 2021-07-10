@@ -1,18 +1,23 @@
-package jp.ac.titech.itpro.sdl.frashcard.card;
+package jp.ac.titech.itpro.sdl.frashcard.test.communication;
 
 import android.util.JsonReader;
-import android.util.JsonToken;
 import android.util.Log;
 
 import java.io.Closeable;
 import java.io.IOException;
 
-public class CardReader implements Closeable {
-    private final static String TAG = CardReader.class.getSimpleName();
-    private final JsonReader reader;
+import jp.ac.titech.itpro.sdl.frashcard.card.Card;
+import jp.ac.titech.itpro.sdl.frashcard.card.CardReader;
 
-    public CardReader(JsonReader reader) {
+public class CommunicationReader implements Closeable {
+    private final static String TAG = CommunicationReader.class.getSimpleName();
+
+    private final JsonReader reader;
+    private final CardReader cardReader;
+
+    public CommunicationReader(JsonReader reader) {
         this.reader = reader;
+        this.cardReader = new CardReader(reader);
     }
 
     @Override
@@ -36,27 +41,23 @@ public class CardReader implements Closeable {
         reader.endArray();
     }
 
-    public Card read() throws IOException {
+    public CommunicationData read() throws IOException {
         Log.d(TAG, "read");
-        String front = null;
-        String backTrue = null;
-        String backFalse1 = null;
-        String backFalse2 = null;
+        int dataType = -1;
+        Card card = null;
+        int contents = -1;
 
         reader.beginObject();
         while (reader.hasNext()) {
             switch (reader.nextName()) {
-                case Card.FRONT:
-                    front = reader.nextString();
+                case CommunicationData.FIELD_DATA_TYPE:
+                    dataType = reader.nextInt();
                     break;
-                case Card.BACK_TRUE:
-                    backTrue = reader.nextString();
+                case CommunicationData.FIELD_CARD:
+                    card = cardReader.read();
                     break;
-                case Card.BACK_FALSE1:
-                    backFalse1 = reader.nextString();
-                    break;
-                case Card.BACK_FALSE2:
-                    backFalse2 = reader.nextString();
+                case CommunicationData.FIELD_CONTENTS:
+                    contents = reader.nextInt();
                     break;
                 default:
                     reader.skipValue();
@@ -64,6 +65,6 @@ public class CardReader implements Closeable {
             }
         }
         reader.endObject();
-        return new Card(front, backTrue, backFalse1, backFalse2);
+        return new CommunicationData(dataType, card, contents);
     }
 }

@@ -217,7 +217,7 @@ public class ScanActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
-    static String caption(BluetoothDevice device) {
+    public static String caption(BluetoothDevice device) {
         String name = device.getName();
         return name == null ? "(no name)" : name;
     }

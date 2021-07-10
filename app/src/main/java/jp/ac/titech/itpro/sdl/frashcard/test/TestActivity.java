@@ -14,7 +14,7 @@ import androidx.databinding.ViewDataBinding;
 
 import java.util.ArrayList;
 
-import jp.ac.titech.itpro.sdl.frashcard.Card;
+import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 
@@ -104,9 +104,13 @@ public abstract class TestActivity extends AppCompatActivity {
         buttonFinish.setVisibility(View.VISIBLE);
 
         // If there are remaining data, make next button visible.
-        if (cardData.size() > cardIndex) {
+        if (isRemainData()) {
             buttonNext.setVisibility(View.VISIBLE);
         }
+    }
+
+    protected boolean isRemainData() {
+        return cardData.size() > cardIndex;
     }
 
     protected abstract void finishTesting();
