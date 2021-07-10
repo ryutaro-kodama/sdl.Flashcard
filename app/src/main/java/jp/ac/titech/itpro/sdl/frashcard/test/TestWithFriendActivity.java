@@ -38,6 +38,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
         Answering,
         YouAnswered,
         FriendAnswered,
+        BothWaiting,
         YouWaiting,
         FriendWaiting,
         Disconnected,
@@ -111,9 +112,6 @@ public abstract class TestWithFriendActivity extends TestActivity {
                 } else {
                     imageView.setImageResource(R.drawable.incorrect);
                 }
-
-                // Make next button and finish button visible.
-                visibleNextAndFinishButton();
 
                 // Get answered index.
                 int answerIndex = -1;
@@ -244,7 +242,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
                             // Get friend's image view.
                             int friendImageViewId = activity.getFriendImageViewId(answerIndex);
                             ImageView friendImageView = activity.findViewById(friendImageViewId);
-                            friendImageView.setVisibility(View.VISIBLE);
+                            friendImageView.setVisibility(View.INVISIBLE);
 
                             // Set image to the friend's image view.
                             card = activity.getCard();
@@ -254,6 +252,8 @@ public abstract class TestWithFriendActivity extends TestActivity {
                                 friendImageView.setImageResource(R.drawable.incorrect);
                             }
                             activity.setFriendImageView(friendImageView);
+
+                            activity.setState(State.FriendAnswered);
                     }
                     break;
                 case CommonThread.MSG_FINISHED:
@@ -282,6 +282,13 @@ public abstract class TestWithFriendActivity extends TestActivity {
     }
 
     protected void setState(State state){
+        if ((this.state == State.YouAnswered && state == State.FriendAnswered) || (this.state == State.FriendAnswered && state == State.YouAnswered)) {
+            this.state = State.BothWaiting;
+            // When state become 'BothWaiting', display friend's answer.
+            friendImageView.setVisibility(View.VISIBLE);
+            // Make next button and finish button visible.
+            visibleNextAndFinishButton();
+        }
         this.state = state;
     }
 
