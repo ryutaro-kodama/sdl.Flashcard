@@ -16,15 +16,12 @@ import androidx.annotation.RequiresApi;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsWithFriendBinding;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationDataFactory;
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationReader;
 import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
 import jp.ac.titech.itpro.sdl.frashcard.thread.CommonThread;
 
@@ -38,9 +35,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
         Answering,
         YouAnswered,
         FriendAnswered,
-        BothWaiting,
-        YouWaiting,
-        FriendWaiting,
+        BothAnswered,
         Disconnected,
     }
 
@@ -107,11 +102,8 @@ public abstract class TestWithFriendActivity extends TestActivity {
                 imageView.setVisibility(View.VISIBLE);
 
                 // Set image to display correct or incorrect..
-                if (clickedChoice.equals(card.getBackTrue())) {
-                    imageView.setImageResource(R.drawable.correct);
-                } else {
-                    imageView.setImageResource(R.drawable.incorrect);
-                }
+                displayCorrectOrIncorrectImage(
+                        clickedChoice.equals(card.getBackTrue()), imageView);
 
                 // Get answered index.
                 int answerIndex = -1;
@@ -146,6 +138,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
         setState(State.Answering);
     }
 
+    // Return the "ImageViewId" based on clicked button to display correct or incorrect image.
     private int getImageViewId(View view) {
         Log.d(TAG, "getImageViewId");
 
@@ -163,27 +156,17 @@ public abstract class TestWithFriendActivity extends TestActivity {
         }
     }
 
-    public ImageView getFriendImageView() {
-        return friendImageView;
+    // Based on "isCorrect", display image.
+    public void displayCorrectOrIncorrectImage(boolean isCorrect, ImageView target) {
+        if (isCorrect) {
+            target.setImageResource(R.drawable.correct);
+        } else {
+            target.setImageResource(R.drawable.incorrect);
+        }
     }
 
     public void setFriendImageView(ImageView friendImageView) {
         this.friendImageView = friendImageView;
-    }
-
-    public int getFriendImageViewId(int answerIndex) {
-        Log.d(TAG, "getFriendImageViewId");
-
-        if (answerIndex == 0) {
-            return R.id.test_choice1_friend_image;
-        } else if (answerIndex == 1) {
-            return R.id.test_choice2_friend_image;
-        } else if (answerIndex == 2) {
-            return R.id.test_choice3_friend_image;
-        } else {
-            assert false;
-            return -1;
-        }
     }
 
     @Override
@@ -240,26 +223,40 @@ public abstract class TestWithFriendActivity extends TestActivity {
                             int answerIndex = data.getContents();
 
                             // Get friend's image view.
-                            int friendImageViewId = activity.getFriendImageViewId(answerIndex);
+                            int friendImageViewId = getFriendImageViewId(answerIndex);
                             ImageView friendImageView = activity.findViewById(friendImageViewId);
                             friendImageView.setVisibility(View.INVISIBLE);
 
                             // Set image to the friend's image view.
                             card = activity.getCard();
-                            if (card.getChoiceList().get(answerIndex).equals(card.getBackTrue())) {
-                                friendImageView.setImageResource(R.drawable.correct);
-                            } else {
-                                friendImageView.setImageResource(R.drawable.incorrect);
-                            }
+                            activity.displayCorrectOrIncorrectImage(
+                                    card.getChoiceList().get(answerIndex).equals(card.getBackTrue()),
+                                    friendImageView
+                            );
                             activity.setFriendImageView(friendImageView);
 
                             activity.setState(State.FriendAnswered);
                     }
                     break;
                 case CommonThread.MSG_FINISHED:
-//                    Toast.makeText(activity, R.string.toast_connection_closed, Toast.LENGTH_SHORT).show();
                     activity.setState(State.Disconnected);
                     break;
+            }
+        }
+
+        // Return the "ImageViewId" based on clicked button index to display correct or incorrect image.
+        private int getFriendImageViewId(int answerIndex) {
+            Log.d(TAG, "getFriendImageViewId");
+
+            if (answerIndex == 0) {
+                return R.id.test_choice1_friend_image;
+            } else if (answerIndex == 1) {
+                return R.id.test_choice2_friend_image;
+            } else if (answerIndex == 2) {
+                return R.id.test_choice3_friend_image;
+            } else {
+                assert false;
+                return -1;
             }
         }
     }
@@ -283,7 +280,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
 
     protected void setState(State state){
         if ((this.state == State.YouAnswered && state == State.FriendAnswered) || (this.state == State.FriendAnswered && state == State.YouAnswered)) {
-            this.state = State.BothWaiting;
+            this.state = State.BothAnswered;
             // When state become 'BothWaiting', display friend's answer.
             friendImageView.setVisibility(View.VISIBLE);
             // Make next button and finish button visible.
