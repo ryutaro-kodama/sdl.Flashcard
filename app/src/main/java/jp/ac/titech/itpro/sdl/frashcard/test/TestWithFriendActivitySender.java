@@ -46,6 +46,7 @@ public class TestWithFriendActivitySender extends TestWithFriendActivity {
             // Skip while the card has choice.
             card = super.getNextCard();
         }
+        setCard(card);
         setState(State.CardReceived);
 
         // Send card to receiver.

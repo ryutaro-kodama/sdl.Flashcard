@@ -52,6 +52,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
     private Card card;
     private State state;
     private ImageView imageView = null;
+    private ImageView friendImageView = null;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -78,6 +79,9 @@ public abstract class TestWithFriendActivity extends TestActivity {
 
         if (imageView != null) {
             imageView.setVisibility(View.INVISIBLE);
+        }
+        if (friendImageView != null) {
+            friendImageView.setVisibility(View.INVISIBLE);
         }
 
         // Set card data to layout by using "data binding".
@@ -110,6 +114,21 @@ public abstract class TestWithFriendActivity extends TestActivity {
 
                 // Make next button and finish button visible.
                 visibleNextAndFinishButton();
+
+                // Get answered index.
+                int answerIndex = -1;
+                if (view.getId() == R.id.test_choice1_button) {
+                    answerIndex = 0;
+                } else if (view.getId() == R.id.test_choice2_button) {
+                    answerIndex = 1;
+                } else if (view.getId() == R.id.test_choice3_button) {
+                    answerIndex = 2;
+                } else {
+                    assert false;
+                }
+                thread.send(communicationDataFactory.makeAnswer(answerIndex));
+
+                setState(State.YouAnswered);
             }
         };
 
@@ -130,7 +149,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
     }
 
     private int getImageViewId(View view) {
-        Log.d(TAG, "clickedCorrectChoice");
+        Log.d(TAG, "getImageViewId");
 
         int buttonId = view.getId();
 
@@ -140,6 +159,29 @@ public abstract class TestWithFriendActivity extends TestActivity {
             return R.id.test_choice2_image;
         } else if (buttonId == R.id.test_choice3_button) {
             return R.id.test_choice3_image;
+        } else {
+            assert false;
+            return -1;
+        }
+    }
+
+    public ImageView getFriendImageView() {
+        return friendImageView;
+    }
+
+    public void setFriendImageView(ImageView friendImageView) {
+        this.friendImageView = friendImageView;
+    }
+
+    public int getFriendImageViewId(int answerIndex) {
+        Log.d(TAG, "getFriendImageViewId");
+
+        if (answerIndex == 0) {
+            return R.id.test_choice1_friend_image;
+        } else if (answerIndex == 1) {
+            return R.id.test_choice2_friend_image;
+        } else if (answerIndex == 2) {
+            return R.id.test_choice3_friend_image;
         } else {
             assert false;
             return -1;
@@ -174,6 +216,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
             if (activity == null) {
                 return;
             }
+            Card card;
             switch (msg.what) {
                 case CommonThread.MSG_STARTED:
                     activity.setState(State.Connected);
@@ -190,11 +233,27 @@ public abstract class TestWithFriendActivity extends TestActivity {
                             if (activity.state != State.CardReceived) assert false;
 
                             // Receive choice order from sender.
-                            Card card = activity.getCard();
+                            card = activity.getCard();
                             card.setChoiceOrder(data.getContents());
                             activity.setState(State.CanDisplayCard);
                             activity.displayCard(card);
                             break;
+                        case CommunicationData.ANSWER:
+                            int answerIndex = data.getContents();
+
+                            // Get friend's image view.
+                            int friendImageViewId = activity.getFriendImageViewId(answerIndex);
+                            ImageView friendImageView = activity.findViewById(friendImageViewId);
+                            friendImageView.setVisibility(View.VISIBLE);
+
+                            // Set image to the friend's image view.
+                            card = activity.getCard();
+                            if (card.getChoiceList().get(answerIndex).equals(card.getBackTrue())) {
+                                friendImageView.setImageResource(R.drawable.correct);
+                            } else {
+                                friendImageView.setImageResource(R.drawable.incorrect);
+                            }
+                            activity.setFriendImageView(friendImageView);
                     }
                     break;
                 case CommonThread.MSG_FINISHED:
