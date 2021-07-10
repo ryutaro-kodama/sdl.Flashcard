@@ -78,6 +78,10 @@ public class Card implements Parcelable {
         choiceOrder = num;
     }
 
+    public int getChoiceOrder() {
+        return choiceOrder;
+    }
+
     public ArrayList<String> getChoiceList() {
         if (choiceOrder == -1) {
             setChoiceOrder();

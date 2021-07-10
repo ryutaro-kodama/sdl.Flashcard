@@ -7,6 +7,10 @@ public class CommunicationDataFactory {
         return new CommunicationData(card);
     }
 
+    public CommunicationData makeChoiceOrder(int choiceOrder) {
+        return new CommunicationData(CommunicationData.CHOICE_ORDER, choiceOrder);
+    }
+
     public CommunicationData makeAnswer(int answer) {
         return new CommunicationData(CommunicationData.ANSWER, answer);
     }

@@ -7,7 +7,8 @@ import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 
 public class CommunicationData implements Parcelable {
     public static final int CARD = 1111;
-    public static final int ANSWER = 2222;
+    public static final int CHOICE_ORDER = 2222;
+    public static final int ANSWER = 3333;
 
     public static final String FIELD_DATA_TYPE = "fieldDataType";
     public static final String FIELD_CARD = "fieldCard";

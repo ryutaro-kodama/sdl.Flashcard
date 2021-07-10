@@ -6,9 +6,7 @@
 
     <data>
         <variable name="card" type="jp.ac.titech.itpro.sdl.frashcard.card.Card"/>
-        <variable name="choice1" type="String" />
-        <variable name="choice2" type="String" />
-        <variable name="choice3" type="String" />
+        <variable name="choices" type="String[]" />
     </data>
 
     <LinearLayout
@@ -38,33 +36,87 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:text="@{choice1}"
+                android:text="@{choices[0]}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_question_text"
                 app:layout_constraintBottom_toTopOf="@+id/test_answer_text" />
+
+            <ImageView
+                android:id="@+id/test_choice1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice1_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice1_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice1_button" />
+
+            <ImageView
+                android:id="@+id/test_choice1_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice1_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice1_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice1_button" />
 
             <Button
                 android:id="@+id/test_choice2_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:text="@{choice2}"
+                android:text="@{choices[1]}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_choice1_button"
                 app:layout_constraintBottom_toTopOf="@+id/test_choice3_button" />
+
+            <ImageView
+                android:id="@+id/test_choice2_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice2_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice2_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice2_button" />
+
+            <ImageView
+                android:id="@+id/test_choice2_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice2_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice2_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice2_button" />
 
             <Button
                 android:id="@+id/test_choice3_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:text="@{choice3}"
+                android:text="@{choices[2]}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_choice2_button"
                 app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/test_choice3_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice3_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
+
+            <ImageView
+                android:id="@+id/test_choice3_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice3_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

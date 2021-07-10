@@ -25,18 +25,6 @@ public class TestBackChoiceActivity extends TestActivity {
         binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
     }
 
-//    @Override
-//    protected Card getNextCard() {
-//        // Get next card from card data file.
-//        Card card = super.getNextCard();
-//        while (card.hasNoChoice()) {
-//            // Skip while the card has choice.
-//            card = super.getNextCard();
-//        }
-//
-//        return card;
-//    }
-
     @Override
     protected void displayCard(Card card) {
         Log.d(TAG, "displayCard");

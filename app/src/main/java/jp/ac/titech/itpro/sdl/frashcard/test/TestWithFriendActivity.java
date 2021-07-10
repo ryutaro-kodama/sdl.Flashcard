@@ -8,6 +8,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,17 +21,20 @@ import java.util.Collections;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
+import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsWithFriendBinding;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationDataFactory;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationReader;
 import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
 import jp.ac.titech.itpro.sdl.frashcard.thread.CommonThread;
 
-public abstract class TestWithFriendActivity extends TestBackChoiceActivity {
+public abstract class TestWithFriendActivity extends TestActivity {
     private final static String TAG = TestWithFriendActivity.class.getSimpleName();
 
     public static enum State {
         Connected,
+        CardReceived,
+        CanDisplayCard,
         Answering,
         YouAnswered,
         FriendAnswered,
@@ -39,21 +43,24 @@ public abstract class TestWithFriendActivity extends TestBackChoiceActivity {
         Disconnected,
     }
 
-    protected TestContentsBackChoiceBinding binding;
+    protected TestContentsWithFriendBinding binding;
     private BluetoothSocket socket;
     private CommonHandler handler;
-    protected CommonThread thread;
-    private Card card;
     protected CommunicationDataFactory communicationDataFactory;
+    protected CommonThread thread;
+
+    private Card card;
     private State state;
+    private ImageView imageView = null;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
-        binding = (TestContentsBackChoiceBinding) setContent(R.layout.test_contents_back_choice);
+        binding = (TestContentsWithFriendBinding) setContent(R.layout.test_contents_with_friend);
 
         socket = BluetoothSocketSingleton.getSocketAndSetNull();
+        communicationDataFactory = new CommunicationDataFactory();
         handler = new CommonHandler(this);
         try {
             // Thread for communicating data.
@@ -62,6 +69,94 @@ public abstract class TestWithFriendActivity extends TestBackChoiceActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void displayCard(Card card) {
+        Log.d(TAG, "displayCard");
+        if (state != State.CanDisplayCard) return;
+
+        if (imageView != null) {
+            imageView.setVisibility(View.INVISIBLE);
+        }
+
+        // Set card data to layout by using "data binding".
+        binding.setCard(card);
+
+        // Next button and finish button are invisible at first.
+        setNextAndFinishButton();
+
+        // Shuffle choices.
+        ArrayList<String> choiceList = card.getChoiceList();
+        binding.setChoices(choiceList.toArray(new String[choiceList.size()]));
+
+        // Create listener object which is called when choices are clicked.
+        View.OnClickListener buttonClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String clickedChoice = ((Button) view).getText().toString();
+
+                // Get "ImageView" to display correct or incorrect.
+                int imageViewId = getImageViewId(view);
+                imageView = findViewById(imageViewId);
+                imageView.setVisibility(View.VISIBLE);
+
+                // Set image to display correct or incorrect..
+                if (clickedChoice.equals(card.getBackTrue())) {
+                    imageView.setImageResource(R.drawable.correct);
+                } else {
+                    imageView.setImageResource(R.drawable.incorrect);
+                }
+
+                // Make next button and finish button visible.
+                visibleNextAndFinishButton();
+            }
+        };
+
+        // Set event lister.
+        Button buttonChoice1 = findViewById(R.id.test_choice1_button);
+        buttonChoice1.setOnClickListener(buttonClick);
+        Button buttonChoice2 = findViewById(R.id.test_choice2_button);
+        buttonChoice2.setOnClickListener(buttonClick);
+        Button buttonChoice3 = findViewById(R.id.test_choice3_button);
+        buttonChoice3.setOnClickListener(buttonClick);
+
+        // When choices are 2, don't set third choice.
+        if (card.hasTwoChoice()) {
+            buttonChoice3.setVisibility(View.GONE);
+        }
+
+        setState(State.Answering);
+    }
+
+    private int getImageViewId(View view) {
+        Log.d(TAG, "clickedCorrectChoice");
+
+        int buttonId = view.getId();
+
+        if (buttonId == R.id.test_choice1_button) {
+            return R.id.test_choice1_image;
+        } else if (buttonId == R.id.test_choice2_button) {
+            return R.id.test_choice2_image;
+        } else if (buttonId == R.id.test_choice3_button) {
+            return R.id.test_choice3_image;
+        } else {
+            assert false;
+            return -1;
+        }
+    }
+
+    @Override
+    protected boolean isRemainData() {
+        // If There is card which has choices, return true.
+        for (int index = cardIndex; index < cardData.size(); index++){
+            if(!cardData.get(index).hasNoChoice()){
+                cardIndex = index;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected static class CommonHandler extends Handler {
@@ -83,17 +178,28 @@ public abstract class TestWithFriendActivity extends TestBackChoiceActivity {
                 case CommonThread.MSG_STARTED:
                     activity.setState(State.Connected);
                     break;
-                case CommonThread.MSG_FINISHED:
-//                    Toast.makeText(activity, R.string.toast_connection_closed, Toast.LENGTH_SHORT).show();
-                    activity.setState(TestWithFriendActivitySender.State.Disconnected);
-                    break;
                 case CommonThread.MSG_RECEIVED:
                     CommunicationData data = (CommunicationData) msg.obj;
                     switch (data.getDataType()) {
                         case CommunicationData.CARD:
+                            // Receive card from sender.
                             activity.setCard(data.getCard());
-                            activity.displayCard();
+                            activity.setState(State.CardReceived);
+                            break;
+                        case CommunicationData.CHOICE_ORDER:
+                            if (activity.state != State.CardReceived) assert false;
+
+                            // Receive choice order from sender.
+                            Card card = activity.getCard();
+                            card.setChoiceOrder(data.getContents());
+                            activity.setState(State.CanDisplayCard);
+                            activity.displayCard(card);
+                            break;
                     }
+                    break;
+                case CommonThread.MSG_FINISHED:
+//                    Toast.makeText(activity, R.string.toast_connection_closed, Toast.LENGTH_SHORT).show();
+                    activity.setState(State.Disconnected);
                     break;
             }
         }
