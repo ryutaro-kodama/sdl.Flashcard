@@ -46,8 +46,8 @@
                 android:id="@+id/test_choice1_image"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/test_choice1_button"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice1_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/test_choice1_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice1_button" />
 
@@ -66,8 +66,8 @@
                 android:id="@+id/test_choice2_image"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/test_choice2_button"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice2_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/test_choice2_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice2_button" />
 
@@ -86,8 +86,8 @@
                 android:id="@+id/test_choice3_image"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/test_choice3_button"
+                app:layout_constraintEnd_toStartOf="@+id/test_choice3_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
 
