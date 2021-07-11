@@ -72,22 +72,28 @@ public abstract class TestWithFriendActivity extends TestActivity {
         }
     }
 
-    @Override
-    protected void displayCard(Card card) {
-        Log.d(TAG, "displayCard");
-        if (state != State.CanDisplayCard) return;
-
+    private void initDisplaying() {
+        // Delete correct or incorrect image.
         if (imageView != null) {
             imageView.setVisibility(View.INVISIBLE);
         }
         if (friendImageView != null) {
             friendImageView.setVisibility(View.INVISIBLE);
         }
+
+        // Make all buttons clickable.
         for(int index = 0; index < allChoiceButtonIds.length; index++){
-            // Make all buttons clickable.
             Button notClickedButton = findViewById(allChoiceButtonIds[index]);
             notClickedButton.setEnabled(true);
         }
+    }
+
+    @Override
+    protected void displayCard(Card card) {
+        Log.d(TAG, "displayCard");
+        if (state != State.CanDisplayCard) return;
+
+        initDisplaying();
 
         // Set card data to layout by using "data binding".
         binding.setCard(card);
