@@ -98,7 +98,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_choice2_button"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/test_choice_friend_finish_text" />
 
             <ImageView
                 android:id="@+id/test_choice3_image"
@@ -117,6 +117,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
+
+            <!--  Text for notice that friend has finished test.  -->
+            <TextView
+                android:id="@+id/test_choice_friend_finish_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/test_choice_friend_finish_text"
+                android:textColor="@color/red"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/test_choice3_button"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

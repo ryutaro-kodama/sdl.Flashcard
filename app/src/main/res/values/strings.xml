@@ -47,6 +47,9 @@
     <string name="menu_scan_scan">Scan</string>
     <string name="menu_scan_stop">Stop</string>
 
+    <!--  Strings used for menu for test with friend page  -->
+    <string name="test_choice_friend_finish_text">Friend has finished test</string>
+
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

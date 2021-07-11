@@ -14,4 +14,8 @@ public class CommunicationDataFactory {
     public CommunicationData makeAnswer(int answer) {
         return new CommunicationData(CommunicationData.ANSWER, answer);
     }
+
+    public static CommunicationData makeFinish() {
+        return new CommunicationData(CommunicationData.FINISH, 1);
+    }
 }

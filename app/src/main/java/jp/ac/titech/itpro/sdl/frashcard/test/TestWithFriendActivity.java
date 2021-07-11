@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -116,6 +117,8 @@ public abstract class TestWithFriendActivity extends TestActivity {
                 } else {
                     assert false;
                 }
+
+                // Send your answer to friend to display your answer.
                 thread.send(communicationDataFactory.makeAnswer(answerIndex));
 
                 setState(State.YouAnswered);
@@ -182,6 +185,25 @@ public abstract class TestWithFriendActivity extends TestActivity {
         return false;
     }
 
+    private void friendFinish() {
+        // Set next button not to be pressed, because friend has finished test.
+        Button nextButton = findViewById(R.id.test_next_button);
+        nextButton.setEnabled(false);
+        visibleNextAndFinishButton();
+
+        // Notice that friend has finished test.
+        TextView friendFinishText = findViewById(R.id.test_choice_friend_finish_text);
+        friendFinishText.setText(R.string.test_choice_friend_finish_text);
+        friendFinishText.setVisibility(View.VISIBLE);
+
+        // Delete thread.
+        if (thread != null) {
+            thread = null;
+        }
+
+        setState(State.Disconnected);
+    }
+
     protected static class CommonHandler extends Handler {
         WeakReference<TestWithFriendActivity> ref;
 
@@ -205,12 +227,12 @@ public abstract class TestWithFriendActivity extends TestActivity {
                 case CommonThread.MSG_RECEIVED:
                     CommunicationData data = (CommunicationData) msg.obj;
                     switch (data.getDataType()) {
-                        case CommunicationData.CARD:
+                        case CommunicationData.CARD:  // Receive card data.
                             // Receive card from sender.
                             activity.setCard(data.getCard());
                             activity.setState(State.CardReceived);
                             break;
-                        case CommunicationData.CHOICE_ORDER:
+                        case CommunicationData.CHOICE_ORDER:  // Receive choice's order.
                             if (activity.state != State.CardReceived) assert false;
 
                             // Receive choice order from sender.
@@ -219,7 +241,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
                             activity.setState(State.CanDisplayCard);
                             activity.displayCard(card);
                             break;
-                        case CommunicationData.ANSWER:
+                        case CommunicationData.ANSWER:  // Receive friend's answer.
                             int answerIndex = data.getContents();
 
                             // Get friend's image view.
@@ -236,6 +258,10 @@ public abstract class TestWithFriendActivity extends TestActivity {
                             activity.setFriendImageView(friendImageView);
 
                             activity.setState(State.FriendAnswered);
+                            break;
+                        case CommunicationData.FINISH:
+                            activity.friendFinish();
+                            break;
                     }
                     break;
                 case CommonThread.MSG_FINISHED:
@@ -269,15 +295,6 @@ public abstract class TestWithFriendActivity extends TestActivity {
         return this.card;
     }
 
-
-    private void clickedCorrectChoice() {
-        Log.d(TAG, "correct!!!");
-    }
-
-    private void clickedIncorrectChoice() {
-        Log.d(TAG, "incorrect!!!");
-    }
-
     protected void setState(State state){
         if ((this.state == State.YouAnswered && state == State.FriendAnswered) || (this.state == State.FriendAnswered && state == State.YouAnswered)) {
             this.state = State.BothAnswered;
@@ -285,8 +302,9 @@ public abstract class TestWithFriendActivity extends TestActivity {
             friendImageView.setVisibility(View.VISIBLE);
             // Make next button and finish button visible.
             visibleNextAndFinishButton();
+        } else {
+            this.state = state;
         }
-        this.state = state;
     }
 
     @Override
@@ -297,11 +315,14 @@ public abstract class TestWithFriendActivity extends TestActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "onDestroy");
+        super.onDestroy();
         if (thread != null) {
+            thread.send(CommunicationDataFactory.makeFinish());
             thread.close();
+            thread = null;
         }
+        setState(State.Disconnected);
     }
 }
 
