@@ -141,6 +141,7 @@
                 android:textSize="@dimen/text_size"
                 android:text="@string/test_choice_friend_receiver_wait"
                 android:layout_marginTop="50dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_choice_friend_finish_text"
