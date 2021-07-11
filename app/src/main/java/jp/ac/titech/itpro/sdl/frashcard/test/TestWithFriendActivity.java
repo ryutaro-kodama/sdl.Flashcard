@@ -50,6 +50,9 @@ public abstract class TestWithFriendActivity extends TestActivity {
     private State state;
     private ImageView imageView = null;
     private ImageView friendImageView = null;
+    private int[] allChoiceButtonIds = new int[]{R.id.test_choice1_button,
+                                              R.id.test_choice2_button,
+                                              R.id.test_choice3_button};
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -80,6 +83,11 @@ public abstract class TestWithFriendActivity extends TestActivity {
         if (friendImageView != null) {
             friendImageView.setVisibility(View.INVISIBLE);
         }
+        for(int index = 0; index < allChoiceButtonIds.length; index++){
+            // Make all buttons clickable.
+            Button notClickedButton = findViewById(allChoiceButtonIds[index]);
+            notClickedButton.setEnabled(true);
+        }
 
         // Set card data to layout by using "data binding".
         binding.setCard(card);
@@ -106,17 +114,27 @@ public abstract class TestWithFriendActivity extends TestActivity {
                 displayCorrectOrIncorrectImage(
                         clickedChoice.equals(card.getBackTrue()), imageView);
 
-                // Get answered index.
+
                 int answerIndex = -1;
-                if (view.getId() == R.id.test_choice1_button) {
-                    answerIndex = 0;
-                } else if (view.getId() == R.id.test_choice2_button) {
-                    answerIndex = 1;
-                } else if (view.getId() == R.id.test_choice3_button) {
-                    answerIndex = 2;
-                } else {
-                    assert false;
+                for(int index = 0; index < allChoiceButtonIds.length; index++){
+                    if (view.getId() == allChoiceButtonIds[index]) {
+                        // If clicked button, get answered index.
+                        answerIndex = index;
+                    } else {
+                        // If not, make the button not clickable.
+                        Button notClickedButton = findViewById(allChoiceButtonIds[index]);
+                        notClickedButton.setEnabled(false);
+                    }
                 }
+//                if (view.getId() == R.id.test_choice1_button) {
+//                    answerIndex = 0;
+//                } else if (view.getId() == R.id.test_choice2_button) {
+//                    answerIndex = 1;
+//                } else if (view.getId() == R.id.test_choice3_button) {
+//                    answerIndex = 2;
+//                } else {
+//                    assert false;
+//                }
 
                 // Send your answer to friend to display your answer.
                 thread.send(communicationDataFactory.makeAnswer(answerIndex));
