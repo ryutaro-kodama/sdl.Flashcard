@@ -72,7 +72,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
         }
     }
 
-    private void initDisplaying() {
+    protected void initDisplaying() {
         // Delete correct or incorrect image.
         if (imageView != null) {
             imageView.setVisibility(View.INVISIBLE);
@@ -209,7 +209,7 @@ public abstract class TestWithFriendActivity extends TestActivity {
         return false;
     }
 
-    private void friendFinish() {
+    protected void friendFinish() {
         // Set next button not to be pressed, because friend has finished test.
         Button nextButton = findViewById(R.id.test_next_button);
         nextButton.setEnabled(false);

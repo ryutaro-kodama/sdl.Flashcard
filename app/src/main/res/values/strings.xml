@@ -49,6 +49,7 @@
 
     <!--  Strings used for menu for test with friend page  -->
     <string name="test_choice_friend_finish_text">Friend has finished test</string>
+    <string name="test_choice_friend_receiver_wait">Wait for friend\'s action</string>
 
 
     <!-- Strings used for fragments for navigation -->
