@@ -10,7 +10,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.TestWithFriendHomeActivity;
 
+// This is the activity for main test page.
 public class TestMainActivity extends AppCompatActivity {
     private final static String TAG = TestMainActivity.class.getSimpleName();
 

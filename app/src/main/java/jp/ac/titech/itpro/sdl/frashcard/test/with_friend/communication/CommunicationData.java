@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.communication;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication;
 
 import android.os.Parcel;
 import android.os.Parcelable;

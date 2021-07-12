@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend;
 
 import android.util.Log;
 

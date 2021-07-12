@@ -28,11 +28,11 @@
         <activity android:name=".test.TestFrontActivity" />
         <activity android:name=".test.TestBackActivity" />
         <activity android:name=".test.TestBackChoiceActivity" />
-        <activity android:name=".test.TestWithFriendHomeActivity" />
-        <activity android:name=".test.TestWithFriendActivity" />
-        <activity android:name=".test.TestWithFriendActivityReceiver" />
-        <activity android:name=".test.TestWithFriendActivitySender" />
-        <activity android:name=".test.connection.ScanActivity" />
+        <activity android:name=".test.with_friend.TestWithFriendHomeActivity" />
+        <activity android:name=".test.with_friend.TestWithFriendActivity" />
+        <activity android:name=".test.with_friend.TestWithFriendActivityReceiver" />
+        <activity android:name=".test.with_friend.TestWithFriendActivitySender" />
+        <activity android:name=".test.with_friend.connection.ScanActivity" />
     </application>
 
 </manifest>

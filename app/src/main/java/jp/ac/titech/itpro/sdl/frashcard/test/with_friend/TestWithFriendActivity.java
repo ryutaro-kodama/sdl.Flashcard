@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
@@ -20,11 +20,13 @@ import java.util.ArrayList;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsWithFriendBinding;
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationDataFactory;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
-import jp.ac.titech.itpro.sdl.frashcard.test.thread.CommonThread;
+import jp.ac.titech.itpro.sdl.frashcard.test.TestActivity;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication.CommunicationData;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication.CommunicationDataFactory;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.BluetoothSocketSingleton;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.thread.CommonThread;
 
+// This is the activity which is common between sender and receiver.
 public abstract class TestWithFriendActivity extends TestActivity {
     private final static String TAG = TestWithFriendActivity.class.getSimpleName();
 

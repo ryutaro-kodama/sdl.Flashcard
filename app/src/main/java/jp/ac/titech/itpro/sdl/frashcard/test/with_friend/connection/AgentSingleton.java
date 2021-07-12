@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.connection;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection;
 
 public class AgentSingleton {
     private static Agent agent;

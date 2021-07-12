@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.connection;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.test.TestWithFriendHomeActivity;
-import jp.ac.titech.itpro.sdl.frashcard.test.TestWithFriendHomeActivity.State;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.TestWithFriendHomeActivity;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.TestWithFriendHomeActivity.State;
 
 public class ServerAgent extends Agent {
     private final static String TAG = ServerAgent.class.getSimpleName();

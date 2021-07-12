@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".test.TestWithFriendHomeActivity">
+    tools:context=".test.with_friend.TestWithFriendHomeActivity">
 
     <Button
         android:id="@+id/test_with_friend_home_connect"

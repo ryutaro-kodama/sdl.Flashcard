@@ -1,8 +1,6 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.connection;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection;
 
 import android.bluetooth.BluetoothSocket;
-
-import java.net.Socket;
 
 public class BluetoothSocketSingleton {
     private static BluetoothSocket socket;

@@ -18,6 +18,7 @@ import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.card.CardDataFile;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 
+// This is the base abstract activity for each test activity.
 public abstract class TestActivity extends AppCompatActivity {
     private final static String TAG = TestActivity.class.getSimpleName();
 

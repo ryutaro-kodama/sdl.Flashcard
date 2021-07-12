@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
@@ -15,12 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.UUID;
 
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.Agent;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothInitializer;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.ClientAgent;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.ServerAgent;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.Agent;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.BluetoothInitializer;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.BluetoothSocketSingleton;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.ClientAgent;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.connection.ServerAgent;
 
+// This is the activity for test with friend main page.
 public class TestWithFriendHomeActivity  extends AppCompatActivity {
     private final static String TAG = TestWithFriendHomeActivity.class.getSimpleName();
 

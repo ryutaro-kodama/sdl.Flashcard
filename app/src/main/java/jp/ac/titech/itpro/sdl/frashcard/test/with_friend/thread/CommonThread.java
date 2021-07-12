@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.thread;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.thread;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
@@ -16,9 +16,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationReader;
-import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationWriter;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication.CommunicationData;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication.CommunicationReader;
+import jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication.CommunicationWriter;
 
 public class CommonThread extends Thread {
     private final static String TAG = CommonThread.class.getSimpleName();

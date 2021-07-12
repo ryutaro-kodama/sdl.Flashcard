@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.communication;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication;
 
 import android.util.JsonWriter;
 import android.util.Log;
@@ -6,7 +6,6 @@ import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 
-import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.card.CardWriter;
 
 public class CommunicationWriter  implements Closeable {

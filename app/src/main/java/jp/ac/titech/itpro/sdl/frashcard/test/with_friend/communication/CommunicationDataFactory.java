@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test.communication;
+package jp.ac.titech.itpro.sdl.frashcard.test.with_friend.communication;
 
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 
