@@ -29,7 +29,7 @@ import jp.ac.titech.itpro.sdl.frashcard.thread.CommonThread;
 public abstract class TestWithFriendActivity extends TestActivity {
     private final static String TAG = TestWithFriendActivity.class.getSimpleName();
 
-    public static enum State {
+    public enum State {
         Connected,
         CardReceived,
         CanDisplayCard,
@@ -132,15 +132,6 @@ public abstract class TestWithFriendActivity extends TestActivity {
                         notClickedButton.setEnabled(false);
                     }
                 }
-//                if (view.getId() == R.id.test_choice1_button) {
-//                    answerIndex = 0;
-//                } else if (view.getId() == R.id.test_choice2_button) {
-//                    answerIndex = 1;
-//                } else if (view.getId() == R.id.test_choice3_button) {
-//                    answerIndex = 2;
-//                } else {
-//                    assert false;
-//                }
 
                 // Send your answer to friend to display your answer.
                 thread.send(communicationDataFactory.makeAnswer(answerIndex));
@@ -329,12 +320,6 @@ public abstract class TestWithFriendActivity extends TestActivity {
         } else {
             this.state = state;
         }
-    }
-
-    @Override
-    protected void finishTesting() {
-        Log.d(TAG, "finishTesting");
-        finish();
     }
 
     @Override

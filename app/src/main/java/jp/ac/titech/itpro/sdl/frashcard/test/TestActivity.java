@@ -119,7 +119,10 @@ public abstract class TestActivity extends AppCompatActivity {
         return cardData.size() > cardIndex;
     }
 
-    protected abstract void finishTesting();
+    protected void finishTesting() {
+        Log.d(TAG, "finishTesting");
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

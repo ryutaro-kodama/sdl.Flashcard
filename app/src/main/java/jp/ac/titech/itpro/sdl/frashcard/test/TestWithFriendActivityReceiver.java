@@ -73,19 +73,5 @@ public class TestWithFriendActivityReceiver extends TestWithFriendActivity {
 
         receiverWait.setVisibility(View.GONE);
     }
-
-    private void clickedCorrectChoice() {
-        Log.d(TAG, "correct!!!");
-    }
-
-    private void clickedIncorrectChoice() {
-        Log.d(TAG, "incorrect!!!");
-    }
-
-    @Override
-    protected void finishTesting() {
-        Log.d(TAG, "finishTesting");
-        finish();
-    }
 }
 

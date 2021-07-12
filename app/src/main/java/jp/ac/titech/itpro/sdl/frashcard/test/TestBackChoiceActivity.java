@@ -108,11 +108,5 @@ public class TestBackChoiceActivity extends TestActivity {
 
         return false;
     }
-
-    @Override
-    protected void finishTesting() {
-        Log.d(TAG, "finishTesting");
-        finish();
-    }
 }
 

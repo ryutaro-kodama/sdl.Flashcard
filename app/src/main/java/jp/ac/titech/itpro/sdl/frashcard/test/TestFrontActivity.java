@@ -81,10 +81,4 @@ public class TestFrontActivity extends TestActivity implements SensorEventListen
         super.onPause();
         accelerationSensor.unregisterSensorListener(this);
     }
-
-    @Override
-    protected void finishTesting() {
-        Log.d(TAG, "finishTesting");
-        finish();
-    }
 }

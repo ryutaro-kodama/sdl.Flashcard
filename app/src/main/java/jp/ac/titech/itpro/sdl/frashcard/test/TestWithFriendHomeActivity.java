@@ -136,25 +136,13 @@ public class TestWithFriendHomeActivity  extends AppCompatActivity {
         switch (state) {
             case Initializing:
             case Disconnected:
-//                status.setText(R.string.main_status_disconnected);
                 break;
             case Connecting:
 //                status.setText(getString(R.string.main_status_connecting_to, arg));
                 break;
             case Connected:
-//                status.setText(getString(R.string.main_status_connected_to, arg));
-                break;
-            case Waiting:
-//                status.setText(R.string.main_status_listening_for_incoming_connection);
                 break;
         }
         invalidateOptionsMenu();
     }
-
-//    private void disconnect() {
-//        Log.d(TAG, "disconnect");
-//        agent.close();
-//        agent = null;
-//        setState(State.Disconnected);
-//    }
 }

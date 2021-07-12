@@ -160,7 +160,7 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu");
-        getMenuInflater().inflate(R.menu.scan, menu);
+        getMenuInflater().inflate(R.menu.menu_scan, menu);
         return true;
     }
 

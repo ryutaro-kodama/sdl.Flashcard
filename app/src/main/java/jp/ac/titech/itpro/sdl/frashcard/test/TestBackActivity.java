@@ -77,10 +77,4 @@ public class TestBackActivity extends TestActivity implements SensorEventListene
         super.onPause();
         accelerationSensor.unregisterSensorListener(this);
     }
-
-    @Override
-    protected void finishTesting() {
-        Log.d(TAG, "finishTesting");
-        finish();
-    }
 }
