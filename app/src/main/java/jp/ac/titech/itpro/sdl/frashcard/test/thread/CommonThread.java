@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.thread;
+package jp.ac.titech.itpro.sdl.frashcard.test.thread;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;

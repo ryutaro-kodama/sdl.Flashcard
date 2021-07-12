@@ -6,12 +6,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
-
 
 public class TestBackChoiceActivity extends TestActivity {
     private final static String TAG = TestBackChoiceActivity.class.getSimpleName();
@@ -98,6 +96,7 @@ public class TestBackChoiceActivity extends TestActivity {
 
     @Override
     protected boolean isRemainData() {
+        Log.d(TAG, "isRemainData");
         // If There is card which has choices, return true.
         for (int index = cardIndex; index < cardData.size(); index++){
             if(!cardData.get(index).hasNoChoice()){

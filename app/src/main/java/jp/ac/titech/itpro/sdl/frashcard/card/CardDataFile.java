@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard;
+package jp.ac.titech.itpro.sdl.frashcard.card;
 
 import android.content.Context;
 import android.util.JsonReader;
@@ -10,8 +10,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 
 import static jp.ac.titech.itpro.sdl.frashcard.card.Card.BACK_FALSE1;
 import static jp.ac.titech.itpro.sdl.frashcard.card.Card.BACK_FALSE2;

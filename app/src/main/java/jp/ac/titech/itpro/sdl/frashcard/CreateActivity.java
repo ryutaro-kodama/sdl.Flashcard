@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
+import jp.ac.titech.itpro.sdl.frashcard.card.CardDataFile;
 
 public class CreateActivity extends AppCompatActivity {
     private final static String TAG = CreateActivity.class.getSimpleName();

@@ -13,7 +13,6 @@ import jp.ac.titech.itpro.sdl.frashcard.R;
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsFrontBindingImpl;
 
-
 public class TestFrontActivity extends TestActivity implements SensorEventListener {
     private final static String TAG = TestFrontActivity.class.getSimpleName();
 
@@ -26,6 +25,7 @@ public class TestFrontActivity extends TestActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume");
         accelerationSensor.registerSensorListener(this);
     }
 
@@ -79,6 +79,7 @@ public class TestFrontActivity extends TestActivity implements SensorEventListen
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause");
         accelerationSensor.unregisterSensorListener(this);
     }
 }

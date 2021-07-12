@@ -9,15 +9,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
-import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 
 public class TestMainActivity extends AppCompatActivity {
     private final static String TAG = TestMainActivity.class.getSimpleName();
-
-//    public final static String TEST_TYPE_ARG = "test_type";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

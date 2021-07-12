@@ -25,6 +25,7 @@ public class TestBackActivity extends TestActivity implements SensorEventListene
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume");
         accelerationSensor.registerSensorListener(this);
     }
 
@@ -75,6 +76,7 @@ public class TestBackActivity extends TestActivity implements SensorEventListene
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause");
         accelerationSensor.unregisterSensorListener(this);
     }
 }

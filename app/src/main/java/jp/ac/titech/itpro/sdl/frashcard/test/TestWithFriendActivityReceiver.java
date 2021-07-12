@@ -1,24 +1,17 @@
 package jp.ac.titech.itpro.sdl.frashcard.test;
 
-import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
 import jp.ac.titech.itpro.sdl.frashcard.R;
-import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsBackChoiceBinding;
-import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
 
 public class TestWithFriendActivityReceiver extends TestWithFriendActivity {
-    private final static String TAG = TestWithFriendActivity.class.getSimpleName();
+    private final static String TAG = TestWithFriendActivityReceiver.class.getSimpleName();
 
     private TextView receiverWait;
 
@@ -26,6 +19,7 @@ public class TestWithFriendActivityReceiver extends TestWithFriendActivity {
     @Override
     protected void initTesting() {
         super.initTesting();
+        Log.d(TAG, "initTesting");
 
         // Get text of notice that wait for friend's next action.
         receiverWait = findViewById(R.id.test_choice_friend_receiver_wait);
@@ -34,6 +28,7 @@ public class TestWithFriendActivityReceiver extends TestWithFriendActivity {
 
     @Override
     protected void loadCard() {
+        Log.d(TAG, "loadCard");
         // The receiver doesn't load card data file.
         return;
     }
@@ -41,6 +36,7 @@ public class TestWithFriendActivityReceiver extends TestWithFriendActivity {
     @Override
     protected void initDisplaying() {
         super.initDisplaying();
+        Log.d(TAG, "initDisplaying");
 
         // Delete the notice.
         receiverWait.setVisibility(View.GONE);

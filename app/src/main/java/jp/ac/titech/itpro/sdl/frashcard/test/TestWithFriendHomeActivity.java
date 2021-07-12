@@ -74,6 +74,7 @@ public class TestWithFriendHomeActivity  extends AppCompatActivity {
     }
 
     public void finishConnecting(BluetoothSocket socket) {
+        Log.d(TAG, "finishConnecting");
         // Save the socket.
         BluetoothSocketSingleton.setSocket(socket);
 
@@ -128,6 +129,7 @@ public class TestWithFriendHomeActivity  extends AppCompatActivity {
     }
 
     public void setState(State state) {
+        Log.d(TAG, "setState");
         this.state = state;
     }
 }

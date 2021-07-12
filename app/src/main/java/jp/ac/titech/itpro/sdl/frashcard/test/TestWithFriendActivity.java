@@ -1,6 +1,5 @@
 package jp.ac.titech.itpro.sdl.frashcard.test;
 
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 import android.os.Handler;
@@ -24,7 +23,7 @@ import jp.ac.titech.itpro.sdl.frashcard.databinding.TestContentsWithFriendBindin
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationData;
 import jp.ac.titech.itpro.sdl.frashcard.test.communication.CommunicationDataFactory;
 import jp.ac.titech.itpro.sdl.frashcard.test.connection.BluetoothSocketSingleton;
-import jp.ac.titech.itpro.sdl.frashcard.thread.CommonThread;
+import jp.ac.titech.itpro.sdl.frashcard.test.thread.CommonThread;
 
 public abstract class TestWithFriendActivity extends TestActivity {
     private final static String TAG = TestWithFriendActivity.class.getSimpleName();

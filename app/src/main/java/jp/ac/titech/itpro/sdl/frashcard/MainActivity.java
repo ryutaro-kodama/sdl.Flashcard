@@ -16,7 +16,6 @@ import jp.ac.titech.itpro.sdl.frashcard.test.TestMainActivity;
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
-//    static final String CARD_DATA_ARG = "card_data";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,30 +31,15 @@ public class MainActivity extends AppCompatActivity {
         Button buttonNewCard = findViewById(R.id.main_create_new_card);
         buttonNewCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CreateActivity.class);
-//            intent.putExtra(MainActivity.CARD_DATA_ARG, cardData.toString());  // Add an argument, 'CardData' object.
-            // 引数情報を追加
             startActivity(intent);
-            // 特に結果を得ることは想定していない
         });
 
         // Set test button and register intent.
         Button buttonTestCard = findViewById(R.id.main_test_card);
         buttonTestCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TestMainActivity.class);
-//            intent.putExtra(MainActivity.CARD_DATA_ARG, cardData.toString());  // Add an argument, 'CardData' object.
-            // 引数情報を追加
             startActivity(intent);
-            // 特に結果を得ることは想定していない
         });
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override

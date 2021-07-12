@@ -15,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
 import java.util.ArrayList;
 
 import jp.ac.titech.itpro.sdl.frashcard.card.Card;
-import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
+import jp.ac.titech.itpro.sdl.frashcard.card.CardDataFile;
 import jp.ac.titech.itpro.sdl.frashcard.R;
 
 public abstract class TestActivity extends AppCompatActivity {
@@ -41,6 +41,7 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void displayFirstCard() {
+        Log.d(TAG, "displayFirstCard");
         Card card = getNextCard();
         if (isRemainData()) {
             // Display first Card
@@ -51,6 +52,7 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void loadCard() {
+        Log.d(TAG, "loadCard");
         // Load card data.
         CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
         cardData = cardDataFile.getCardData();
@@ -77,12 +79,14 @@ public abstract class TestActivity extends AppCompatActivity {
     protected abstract void displayCard(Card card);
 
     protected Card getNextCard() {
+        Log.d(TAG, "getNextCard");
         Card card = cardData.get(cardIndex);
         cardIndex++;
         return card;
     }
 
     protected void setNextAndFinishButton() {
+        Log.d(TAG, "setNextAndFinishButton");
         buttonNext = findViewById(R.id.test_next_button);
         buttonNext.setVisibility(View.INVISIBLE);
         buttonNext.setOnClickListener(v -> {
@@ -97,6 +101,7 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void onClickNextButton() {
+        Log.d(TAG, "onClickNextButton");
         Card card = getNextCard();
         displayCard(card);
     }
@@ -107,6 +112,7 @@ public abstract class TestActivity extends AppCompatActivity {
 
     // Make the next and finish button visible.
     protected void visibleNextAndFinishButton() {
+        Log.d(TAG, "visibleNextAndFinishButton");
         buttonFinish.setVisibility(View.VISIBLE);
 
         // If there are remaining data, make next button visible.

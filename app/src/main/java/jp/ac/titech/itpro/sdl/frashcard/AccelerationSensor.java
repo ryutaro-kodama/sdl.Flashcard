@@ -39,11 +39,13 @@ public class AccelerationSensor {
     }
 
     public void registerSensorListener(AppCompatActivity activity) {
+        Log.d(TAG, "registerSensorListener");
         manager.registerListener((SensorEventListener) activity, sensor, delay);
     }
 
     // Calculation size of acceleration.
     public double calcAcceleration(SensorEvent event) {
+        Log.d(TAG, "calcAcceleration");
         float x = event.values[0];
         float y = event.values[1];
         float z = event.values[2];
@@ -55,6 +57,7 @@ public class AccelerationSensor {
     }
 
     public void unregisterSensorListener(AppCompatActivity activity) {
+        Log.d(TAG, "unregisterSensorListener");
         manager.unregisterListener((SensorEventListener) activity);
     }
 
