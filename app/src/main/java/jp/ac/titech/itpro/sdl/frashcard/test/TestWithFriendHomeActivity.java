@@ -128,21 +128,6 @@ public class TestWithFriendHomeActivity  extends AppCompatActivity {
     }
 
     public void setState(State state) {
-        setState(state, null);
-    }
-
-    public void setState(State state, String arg) {
         this.state = state;
-        switch (state) {
-            case Initializing:
-            case Disconnected:
-                break;
-            case Connecting:
-//                status.setText(getString(R.string.main_status_connecting_to, arg));
-                break;
-            case Connected:
-                break;
-        }
-        invalidateOptionsMenu();
     }
 }

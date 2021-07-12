@@ -52,7 +52,7 @@ public class ClientAgent extends Agent {
 
         // Let 'ClientTask' socket connection.
         new ClientTask(this).execute(device);
-        activity.setState(State.Connecting, device.getName());
+        activity.setState(State.Connecting);
     }
 
     // This is the thread which connects socket communication.
