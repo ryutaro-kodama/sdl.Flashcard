@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sdl.Frashcard</string>
+    <string name="app_name">sdl.Flashcard</string>
     <string name="action_settings">Settings</string>
 
     <!--  Strings used for fragments for main page  -->

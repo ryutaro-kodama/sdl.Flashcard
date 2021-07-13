@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "jp.ac.titech.itpro.sdl.frashcard"
+        applicationId "jp.ac.titech.itpro.sdl.flashcard"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
