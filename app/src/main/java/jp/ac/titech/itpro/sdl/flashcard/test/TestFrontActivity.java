@@ -11,12 +11,12 @@ import android.widget.TextView;
 import jp.ac.titech.itpro.sdl.flashcard.AccelerationSensor;
 import jp.ac.titech.itpro.sdl.flashcard.R;
 import jp.ac.titech.itpro.sdl.flashcard.card.Card;
-import jp.ac.titech.itpro.sdl.flashcard.databinding.TestContentsFrontBindingImpl;
+import jp.ac.titech.itpro.sdl.flashcard.databinding.TestContentsFrontBinding;
 
 public class TestFrontActivity extends TestActivity implements SensorEventListener {
     private final static String TAG = TestFrontActivity.class.getSimpleName();
 
-    private TestContentsFrontBindingImpl binding;
+    private TestContentsFrontBinding binding;
     private Button buttonAnswer;
 
     private AccelerationSensor accelerationSensor;
@@ -32,7 +32,7 @@ public class TestFrontActivity extends TestActivity implements SensorEventListen
     @Override
     protected void initTesting() {
         Log.d(TAG, "initTesting");
-        binding = (TestContentsFrontBindingImpl) setContent(R.layout.test_contents_front);
+        binding = (TestContentsFrontBinding) setContent(R.layout.test_contents_front);
 
         buttonAnswer = findViewById(R.id.test_answer_button);
 

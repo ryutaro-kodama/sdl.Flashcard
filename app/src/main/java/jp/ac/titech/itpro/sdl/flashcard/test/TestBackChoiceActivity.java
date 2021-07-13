@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import jp.ac.titech.itpro.sdl.flashcard.card.Card;
 import jp.ac.titech.itpro.sdl.flashcard.R;
+import jp.ac.titech.itpro.sdl.flashcard.card.Card;
 import jp.ac.titech.itpro.sdl.flashcard.databinding.TestContentsBackChoiceBinding;
 
 public class TestBackChoiceActivity extends TestActivity {

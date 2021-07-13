@@ -43,8 +43,8 @@ public abstract class TestActivity extends AppCompatActivity {
 
     protected void displayFirstCard() {
         Log.d(TAG, "displayFirstCard");
-        Card card = getNextCard();
         if (isRemainData()) {
+            Card card = getNextCard();
             // Display first Card
             displayCard(card);
         } else {
