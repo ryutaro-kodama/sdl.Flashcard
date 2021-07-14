@@ -1,5 +1,9 @@
 package jp.ac.titech.itpro.sdl.flashcard;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jp.ac.titech.itpro.sdl.flashcard.card.Card;
 import jp.ac.titech.itpro.sdl.flashcard.card.CardDataFile;
@@ -20,6 +25,7 @@ public class CreateActivity extends AppCompatActivity {
     private ArrayList<Card> tmpCardData;
 
     private EditText frontInput, backInputTrue, backInputFalse1, backInputFalse2;
+    private final String OCR_PACKAGE = "io.github.subhamtyagi.ocr";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,27 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveNewCard(v);
+            }
+        });
+
+
+        Button ocrButton = findViewById(R.id.create_ocr_button);
+        ocrButton.setEnabled(false);
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setAction("android.intent.category.LAUNCHER");
+        intent.setClassName(OCR_PACKAGE, OCR_PACKAGE + ".MainActivity");
+        List<ResolveInfo> ris = getPackageManager().queryIntentActivities(intent, 0);
+        if (ris != null && ris.size() > 0) {
+            // If device has target icr app, make ocr button enable.
+            ocrButton.setEnabled(true);
+        }
+        ocrButton.setOnClickListener(v -> {
+            try {
+                // Start ocr app.
+                startActivity(intent);
+            } catch (ActivityNotFoundException e){
+
             }
         });
     }
