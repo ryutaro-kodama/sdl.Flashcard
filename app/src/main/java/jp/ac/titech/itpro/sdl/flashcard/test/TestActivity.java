@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test;
+package jp.ac.titech.itpro.sdl.flashcard.test;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +14,11 @@ import androidx.databinding.ViewDataBinding;
 
 import java.util.ArrayList;
 
-import jp.ac.titech.itpro.sdl.frashcard.Card;
-import jp.ac.titech.itpro.sdl.frashcard.CardDataFile;
-import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.flashcard.card.Card;
+import jp.ac.titech.itpro.sdl.flashcard.card.CardDataFile;
+import jp.ac.titech.itpro.sdl.flashcard.R;
 
+// This is the base abstract activity for each test activity.
 public abstract class TestActivity extends AppCompatActivity {
     private final static String TAG = TestActivity.class.getSimpleName();
 
@@ -33,18 +34,29 @@ public abstract class TestActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_test);
 
-        // Load card data.
-        CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
-        cardData = cardDataFile.getCardData();
-
         initTesting();
 
-        if (cardData.size() > cardIndex) {
+        loadCard();
+
+        displayFirstCard();
+    }
+
+    protected void displayFirstCard() {
+        Log.d(TAG, "displayFirstCard");
+        if (isRemainData()) {
+            Card card = getNextCard();
             // Display first Card
-            displayCard();
+            displayCard(card);
         } else {
             finishTesting();
         }
+    }
+
+    protected void loadCard() {
+        Log.d(TAG, "loadCard");
+        // Load card data.
+        CardDataFile cardDataFile = new CardDataFile(getApplicationContext());
+        cardData = cardDataFile.getCardData();
     }
 
     protected abstract void initTesting();
@@ -65,15 +77,17 @@ public abstract class TestActivity extends AppCompatActivity {
         return binding;
     }
 
-    protected abstract void displayCard();
+    protected abstract void displayCard(Card card);
 
     protected Card getNextCard() {
+        Log.d(TAG, "getNextCard");
         Card card = cardData.get(cardIndex);
         cardIndex++;
         return card;
     }
 
     protected void setNextAndFinishButton() {
+        Log.d(TAG, "setNextAndFinishButton");
         buttonNext = findViewById(R.id.test_next_button);
         buttonNext.setVisibility(View.INVISIBLE);
         buttonNext.setOnClickListener(v -> {
@@ -88,7 +102,9 @@ public abstract class TestActivity extends AppCompatActivity {
     }
 
     protected void onClickNextButton() {
-        displayCard();
+        Log.d(TAG, "onClickNextButton");
+        Card card = getNextCard();
+        displayCard(card);
     }
 
     protected void onClickFinishButton() {
@@ -97,15 +113,23 @@ public abstract class TestActivity extends AppCompatActivity {
 
     // Make the next and finish button visible.
     protected void visibleNextAndFinishButton() {
+        Log.d(TAG, "visibleNextAndFinishButton");
         buttonFinish.setVisibility(View.VISIBLE);
 
         // If there are remaining data, make next button visible.
-        if (cardData.size() > cardIndex) {
+        if (isRemainData()) {
             buttonNext.setVisibility(View.VISIBLE);
         }
     }
 
-    protected abstract void finishTesting();
+    protected boolean isRemainData() {
+        return cardData.size() > cardIndex;
+    }
+
+    protected void finishTesting() {
+        Log.d(TAG, "finishTesting");
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

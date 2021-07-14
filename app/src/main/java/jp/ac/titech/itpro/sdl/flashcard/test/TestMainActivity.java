@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard.test;
+package jp.ac.titech.itpro.sdl.flashcard.test;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import jp.ac.titech.itpro.sdl.frashcard.CreateActivity;
-import jp.ac.titech.itpro.sdl.frashcard.MainActivity;
-import jp.ac.titech.itpro.sdl.frashcard.R;
+import jp.ac.titech.itpro.sdl.flashcard.R;
+import jp.ac.titech.itpro.sdl.flashcard.test.with_friend.TestWithFriendHomeActivity;
 
+// This is the activity for main test page.
 public class TestMainActivity extends AppCompatActivity {
-    private final static String TAG = MainActivity.class.getSimpleName();
-
-//    public final static String TEST_TYPE_ARG = "test_type";
-
+    private final static String TAG = TestMainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +38,12 @@ public class TestMainActivity extends AppCompatActivity {
         Button buttonTestBackChoice = findViewById(R.id.test_back_from_choice);
         buttonTestBackChoice.setOnClickListener(v -> {
             Intent intent = new Intent(TestMainActivity.this, TestBackChoiceActivity.class);
+            startActivity(intent);
+        });
+
+        Button buttonTestWithFriend = findViewById(R.id.test_with_friend);
+        buttonTestWithFriend.setOnClickListener(v -> {
+            Intent intent = new Intent(TestMainActivity.this, TestWithFriendHomeActivity.class);
             startActivity(intent);
         });
     }

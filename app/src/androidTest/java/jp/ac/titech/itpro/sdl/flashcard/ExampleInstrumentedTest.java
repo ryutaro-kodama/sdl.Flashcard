@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard;
+package jp.ac.titech.itpro.sdl.flashcard;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("jp.ac.titech.itpro.sdl.frashcard", appContext.getPackageName());
+        assertEquals("jp.ac.titech.itpro.sdl.flashcard", appContext.getPackageName());
     }
 }

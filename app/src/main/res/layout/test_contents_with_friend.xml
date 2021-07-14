@@ -51,6 +51,15 @@
                 app:layout_constraintTop_toTopOf="@+id/test_choice1_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice1_button" />
 
+            <ImageView
+                android:id="@+id/test_choice1_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice1_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice1_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice1_button" />
+
             <Button
                 android:id="@+id/test_choice2_button"
                 android:layout_width="wrap_content"
@@ -71,6 +80,15 @@
                 app:layout_constraintTop_toTopOf="@+id/test_choice2_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice2_button" />
 
+            <ImageView
+                android:id="@+id/test_choice2_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice2_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice2_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice2_button" />
+
             <Button
                 android:id="@+id/test_choice3_button"
                 android:layout_width="wrap_content"
@@ -80,7 +98,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_choice2_button"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/test_choice_friend_finish_text" />
 
             <ImageView
                 android:id="@+id/test_choice3_image"
@@ -90,6 +108,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
                 app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
+
+            <ImageView
+                android:id="@+id/test_choice3_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toEndOf="@+id/test_choice3_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/test_choice3_button"
+                app:layout_constraintBottom_toBottomOf="@+id/test_choice3_button" />
+
+            <!--  Text for notice that friend has finished test.  -->
+            <TextView
+                android:id="@+id/test_choice_friend_finish_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/test_choice_friend_finish_text"
+                android:textColor="@color/red"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/test_choice3_button"
+                app:layout_constraintBottom_toTopOf="@+id/test_choice_friend_receiver_wait"/>
+
+            <!--  Text for notice that receiver wait sender's action (used by only receiver).  -->
+            <TextView
+                android:id="@+id/test_choice_friend_receiver_wait"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/test_choice_friend_receiver_wait"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/test_choice_friend_finish_text"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

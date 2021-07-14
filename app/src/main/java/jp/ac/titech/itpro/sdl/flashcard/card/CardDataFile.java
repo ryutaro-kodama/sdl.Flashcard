@@ -1,24 +1,20 @@
-package jp.ac.titech.itpro.sdl.frashcard;
+package jp.ac.titech.itpro.sdl.flashcard.card;
 
 import android.content.Context;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_FALSE1;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_FALSE2;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.BACK_TRUE;
-import static jp.ac.titech.itpro.sdl.frashcard.Card.FRONT;
+import static jp.ac.titech.itpro.sdl.flashcard.card.Card.BACK_FALSE1;
+import static jp.ac.titech.itpro.sdl.flashcard.card.Card.BACK_FALSE2;
+import static jp.ac.titech.itpro.sdl.flashcard.card.Card.BACK_TRUE;
+import static jp.ac.titech.itpro.sdl.flashcard.card.Card.FRONT;
 
 public class CardDataFile {
     private final static String TAG = CardDataFile.class.getSimpleName();

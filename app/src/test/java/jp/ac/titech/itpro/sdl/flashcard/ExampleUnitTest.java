@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.frashcard;
+package jp.ac.titech.itpro.sdl.flashcard;
 
 import org.junit.Test;
 
